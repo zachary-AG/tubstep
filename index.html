@@ -1,0 +1,1601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TubStep™ — Hair Clog Prevention System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── Reset & Base ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:     #1a1916;
+      --off-white: #c8c2b4;
+      --bg-light:  #d4cfc6;
+      --bg-dark:   #2e2d2a;
+      --steel:     #8c8880;
+      --steel-dim: #6b6760;
+      --text-dark: #1a1916;
+      --text-mid:  #3d3b38;
+      --text-light: #c8c2b4;
+      --accent:    #4a4845;
+      --font-display: 'Bebas Neue', monospace;
+      --font-body:    'Roboto Mono', monospace;
+      --font-mono:    'Roboto Mono', monospace;
+      --max-w: 1100px;
+      --section-pad: 100px 24px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-light);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* ─── Scroll-reveal base ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+
+    /* ─── Nav ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      height: 60px;
+      background: rgba(26, 25, 22, 0.82);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s ease;
+    }
+    nav.scrolled { border-bottom-color: rgba(140, 136, 128, 0.3); }
+
+    .nav-wordmark {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      color: var(--off-white);
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+    .nav-wordmark span { color: var(--steel); }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(200, 194, 180, 0.7);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--off-white); }
+
+    /* hamburger */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--off-white);
+      transition: all 0.3s ease;
+    }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    @media (max-width: 768px) {
+      .nav-toggle { display: flex; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 60px; left: 0; right: 0;
+        flex-direction: column;
+        gap: 0;
+        background: rgba(26, 25, 22, 0.96);
+        backdrop-filter: blur(14px);
+        padding: 12px 0 20px;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links li { border-bottom: 1px solid rgba(176,184,193,0.1); }
+      .nav-links a { display: block; padding: 14px 32px; font-size: 0.9rem; }
+    }
+
+    /* ─── Hero ─── */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: var(--black);
+      background: radial-gradient(ellipse 70% 55% at 50% 60%, #2e2b26 0%, #1a1916 68%);
+      overflow: hidden;
+      padding: 80px 24px 60px;
+    }
+
+    .hero-label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--steel);
+      margin-bottom: 20px;
+    }
+
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(3.5rem, 10vw, 8rem);
+      line-height: 0.95;
+      color: var(--off-white);
+      letter-spacing: 0.02em;
+      margin-bottom: 28px;
+    }
+
+    .hero-sub {
+      font-size: clamp(0.9rem, 2vw, 1.05rem);
+      font-weight: 300;
+      color: rgba(200, 194, 180, 0.72);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 48px;
+    }
+
+    /* Hero render placeholder */
+    .hero-render-wrap {
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto 48px;
+    }
+    /* REPLACE: Insert best SolidWorks Visualize render here */
+    #hero-render {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: contain;
+    }
+    .hero-render-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: rgba(140, 136, 128, 0.08);
+      border: 1px solid rgba(140, 136, 128, 0.2);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-render-placeholder p {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: rgba(140, 136, 128, 0.5);
+      text-align: center;
+      padding: 20px;
+      font-style: italic;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--steel);
+      text-decoration: none;
+      border: 1px solid rgba(140, 136, 128, 0.35);
+      padding: 14px 32px;
+      border-radius: 2px;
+      transition: background 0.25s, color 0.25s, border-color 0.25s;
+    }
+    .hero-cta:hover {
+      background: rgba(140, 136, 128, 0.12);
+      color: var(--off-white);
+      border-color: rgba(140, 136, 128, 0.6);
+    }
+    .hero-cta svg { transition: transform 0.25s; }
+    .hero-cta:hover svg { transform: translateY(3px); }
+
+    /* ─── Generic section helpers ─── */
+    .section-light {
+      background: var(--bg-light);
+      padding: var(--section-pad);
+    }
+    .section-dark {
+      background: var(--bg-dark);
+      padding: var(--section-pad);
+      color: var(--text-light);
+    }
+    .container { max-width: var(--max-w); margin: 0 auto; }
+
+    .section-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--steel-dim);
+      margin-bottom: 12px;
+    }
+    .section-dark .section-eyebrow { color: var(--steel); }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      line-height: 1;
+      letter-spacing: 0.02em;
+      margin-bottom: 20px;
+      color: var(--text-dark);
+    }
+    .section-dark .section-title { color: var(--text-light); }
+
+    .section-intro {
+      font-size: 0.97rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--text-mid);
+      max-width: 680px;
+      margin-bottom: 60px;
+    }
+    .section-dark .section-intro { color: rgba(200, 194, 180, 0.7); }
+
+    /* ─── Image placeholder ─── */
+    .img-placeholder {
+      width: 100%;
+      background: #bdb8ae;
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .section-dark .img-placeholder {
+      background: rgba(140, 136, 128, 0.1);
+      border: 1px solid rgba(140, 136, 128, 0.2);
+    }
+    .img-placeholder p {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: #7a7670;
+      text-align: center;
+      font-style: italic;
+    }
+    .section-dark .img-placeholder p { color: rgba(140, 136, 128, 0.55); }
+
+    /* ─── Stats row ─── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-bottom: 72px;
+      border: 1px solid rgba(0,0,0,0.1);
+    }
+    .stat-cell {
+      padding: 40px 24px;
+      text-align: center;
+      border-right: 1px solid rgba(0,0,0,0.1);
+      background: #cdc8be;
+    }
+    .stat-cell:last-child { border-right: none; }
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 6vw, 5rem);
+      line-height: 1;
+      color: var(--text-dark);
+      letter-spacing: 0.02em;
+    }
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--steel-dim);
+      margin-top: 8px;
+    }
+
+    @media (max-width: 768px) {
+      .stats-row { grid-template-columns: 1fr; }
+      .stat-cell { border-right: none; border-bottom: 1px solid rgba(0,0,0,0.08); }
+      .stat-cell:last-child { border-bottom: none; }
+    }
+
+    /* ─── Two-col layout ─── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .two-col.flip { direction: rtl; }
+    .two-col.flip > * { direction: ltr; }
+
+    @media (max-width: 768px) {
+      .two-col { grid-template-columns: 1fr; gap: 36px; }
+      .two-col.flip { direction: ltr; }
+    }
+
+    .two-col-text h3 {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      line-height: 1.05;
+      margin-bottom: 16px;
+      color: var(--text-dark);
+    }
+    .two-col-text p {
+      font-size: 0.92rem;
+      line-height: 1.8;
+      color: var(--text-mid);
+      margin-bottom: 16px;
+    }
+    .two-col-text p:last-child { margin-bottom: 0; }
+
+    /* ─── Overview section ─── */
+    #overview .overview-body { margin-top: 0; }
+
+    /* ─── Prototype section ─── */
+    .proto-video-wrap {
+      margin-bottom: 72px;
+    }
+    .video-label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--steel-dim);
+      margin-bottom: 16px;
+    }
+    /* REPLACE: <video> or <iframe> for full demo video */
+    .video-placeholder {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: rgba(140, 136, 128, 0.08);
+      border: 1px solid rgba(140, 136, 128, 0.18);
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    .video-placeholder svg { opacity: 0.25; }
+    .video-placeholder p {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: rgba(140,136,128,0.6);
+      font-style: italic;
+    }
+
+    .subsystem-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 64px;
+    }
+
+    .subsystem-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .subsystem-card.alt { direction: rtl; }
+    .subsystem-card.alt > * { direction: ltr; }
+
+    @media (max-width: 768px) {
+      .subsystem-card { grid-template-columns: 1fr; gap: 28px; }
+      .subsystem-card.alt { direction: ltr; }
+    }
+
+    .subsystem-img .img-placeholder { aspect-ratio: 4/3; }
+
+    .subsystem-text .sub-label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      color: var(--steel);
+      margin-bottom: 16px;
+    }
+    .subsystem-text h3 {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+      color: var(--text-light);
+      margin-bottom: 16px;
+    }
+    .subsystem-text p {
+      font-size: 0.92rem;
+      line-height: 1.8;
+      color: rgba(200, 194, 180, 0.72);
+    }
+
+    /* ─── Prior Art / dark section ─── */
+    .prior-art-intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      margin-bottom: 72px;
+    }
+    @media (max-width: 768px) {
+      .prior-art-intro { grid-template-columns: 1fr; gap: 32px; }
+    }
+
+    .pa-stat-num {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 6vw, 5rem);
+      line-height: 1;
+      color: var(--steel);
+    }
+    .pa-stat-label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--steel-dim);
+      margin-top: 6px;
+      margin-bottom: 20px;
+    }
+    .pa-body p {
+      font-size: 0.92rem;
+      line-height: 1.8;
+      color: rgba(200, 194, 180, 0.72);
+      margin-bottom: 12px;
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 48px;
+    }
+    .comparison-table th {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--steel-dim);
+      text-align: left;
+      padding: 12px 20px;
+      border-bottom: 1px solid rgba(140,136,128,0.18);
+    }
+    .comparison-table td {
+      padding: 18px 20px;
+      font-size: 0.9rem;
+      color: rgba(200, 194, 180, 0.72);
+      border-bottom: 1px solid rgba(140,136,128,0.1);
+      vertical-align: top;
+      line-height: 1.6;
+    }
+    .comparison-table tr.tubstep-row td {
+      background: rgba(140,136,128,0.1);
+      color: var(--text-light);
+    }
+    .comparison-table tr.tubstep-row td:first-child {
+      color: var(--steel);
+      font-weight: 600;
+      border-left: 2px solid var(--steel);
+    }
+    .comparison-table td.good { color: #7aaa7a; }
+    .comparison-table td.bad  { color: rgba(200,194,180,0.4); }
+    .comparison-table tr.tubstep-row td.good { color: #8aba8a; }
+
+    @media (max-width: 600px) {
+      .comparison-table thead { display: none; }
+      .comparison-table tr { display: block; margin-bottom: 24px; }
+      .comparison-table td { display: block; padding: 8px 16px; }
+      .comparison-table td::before {
+        content: attr(data-label) ": ";
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--steel-dim);
+      }
+    }
+
+    .pa-differentiators {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 48px;
+    }
+    @media (max-width: 600px) {
+      .pa-differentiators { grid-template-columns: 1fr; }
+    }
+    .diff-item {
+      border: 1px solid rgba(140,136,128,0.15);
+      padding: 24px;
+      border-radius: 2px;
+    }
+    .diff-item .diff-icon {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--steel);
+      letter-spacing: 0.12em;
+      margin-bottom: 10px;
+    }
+    .diff-item p {
+      font-size: 0.88rem;
+      line-height: 1.65;
+      color: rgba(200, 194, 180, 0.72);
+    }
+
+    /* ─── Exploded View ─── */
+    .exploded-layout {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .exploded-layout { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    .exploded-img .img-placeholder { aspect-ratio: 4/3; }
+
+    .component-legend ol {
+      list-style: none;
+      padding: 0;
+      counter-reset: legend-counter;
+    }
+    .component-legend li {
+      counter-increment: legend-counter;
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(140,136,128,0.15);
+    }
+    .component-legend li:last-child { border-bottom: none; }
+    .component-legend li::before {
+      content: "0" counter(legend-counter);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--steel);
+      letter-spacing: 0.1em;
+      flex-shrink: 0;
+      min-width: 24px;
+    }
+    .legend-name {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--text-light);
+      margin-bottom: 4px;
+    }
+    .legend-desc {
+      font-size: 0.8rem;
+      color: rgba(200, 194, 180, 0.5);
+      line-height: 1.55;
+    }
+
+    /* ─── Analysis / Simulations ─── */
+    .analysis-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    .analysis-card {
+      border: 1px solid rgba(0,0,0,0.1);
+      background: #cdc8be;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .analysis-card-header {
+      background: var(--bg-dark);
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .analysis-card-header .ac-label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      color: var(--steel);
+    }
+    .analysis-card-header .ac-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--off-white);
+    }
+
+    .analysis-card-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+    @media (max-width: 768px) {
+      .analysis-card-body { grid-template-columns: 1fr; }
+    }
+
+    .ac-text { padding: 36px 32px; }
+    .ac-img { background: #bdb8ae; }
+    .ac-img .img-placeholder { height: 100%; min-height: 200px; aspect-ratio: unset; }
+
+    .qmrd {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .qmrd-item {}
+    .qmrd-item .qmrd-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--steel-dim);
+      margin-bottom: 4px;
+    }
+    .qmrd-item p {
+      font-size: 0.88rem;
+      line-height: 1.75;
+      color: var(--text-mid);
+    }
+
+    .result-highlight {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      color: var(--text-dark);
+      letter-spacing: 0.02em;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .result-sub {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--steel-dim);
+      letter-spacing: 0.1em;
+    }
+
+    .standards-list {
+      list-style: none;
+      padding: 0;
+      margin-top: 8px;
+    }
+    .standards-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      font-size: 0.84rem;
+      line-height: 1.55;
+      color: var(--text-mid);
+    }
+    .standards-list li:last-child { border-bottom: none; }
+    .standards-list .check {
+      color: #5a9e5a;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .standards-list .std-code {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--steel-dim);
+    }
+
+    /* ─── Team ─── */
+    .team-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      justify-content: center;
+    }
+
+    .team-card {
+      flex: 1 1 160px;
+      max-width: 200px;
+      text-align: center;
+      padding: 32px 20px 24px;
+      background: #cdc8be;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 2px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      cursor: default;
+    }
+    .team-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+    }
+
+    .team-photo {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      overflow: hidden;
+      background: #b5b0a7;
+    }
+    .team-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .team-photo.placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .team-photo.placeholder span {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      color: #8a8680;
+    }
+
+    .team-name {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      letter-spacing: 0.04em;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+    }
+    .team-bio {
+      font-size: 0.82rem;
+      line-height: 1.6;
+      color: var(--text-mid);
+      font-style: italic;
+    }
+
+    /* ─── Footer ─── */
+    footer {
+      background: var(--black);
+      padding: 60px 24px;
+      text-align: center;
+    }
+    .footer-wordmark {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      color: var(--text-light);
+      letter-spacing: 0.04em;
+      margin-bottom: 16px;
+    }
+    .footer-wordmark span { color: var(--steel); }
+    .footer-meta {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      color: var(--steel-dim);
+      margin-bottom: 8px;
+    }
+    .footer-members {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      color: rgba(140,136,128,0.4);
+    }
+    .footer-divider {
+      width: 40px;
+      height: 1px;
+      background: rgba(140,136,128,0.25);
+      margin: 24px auto;
+    }
+
+    /* ─── Utility ─── */
+    .divider {
+      height: 1px;
+      background: rgba(0,0,0,0.1);
+      margin: 48px 0;
+    }
+    .dark-divider {
+      height: 1px;
+      background: rgba(140,136,128,0.12);
+      margin: 48px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── Navigation ─── -->
+  <nav id="main-nav">
+    <a href="#hero" class="nav-wordmark">TubStep<span>™</span></a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#prototype">How It Works</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#prior-art">Prior Art</a></li>
+      <li><a href="#analysis">Analysis</a></li>
+    </ul>
+  </nav>
+
+
+  <!-- ─── Hero ─── -->
+  <section id="hero">
+    <p class="hero-label">Columbia University · MECE E3430 · Senior Design · Spring 2026</p>
+
+    <div class="hero-render-wrap reveal">
+      <!-- REPLACE: Insert best SolidWorks Visualize render here -->
+      <div class="hero-render-placeholder">
+        <p>[ SolidWorks Visualize render of TubStep™ device ]<br>Replace with assets/render-main.jpg</p>
+      </div>
+    </div>
+
+    <h1 class="hero-headline reveal reveal-delay-1">MAKE SHOWERING<br>EASIER.</h1>
+    <p class="hero-sub reveal reveal-delay-2">A hands-free, one-step hair clog prevention system for shower and bathtub drains.</p>
+
+    <a href="#overview" class="hero-cta reveal reveal-delay-3">
+      Explore the Design
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <path d="M7 1v12M2 8l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </section>
+
+
+  <!-- ─── Section: Overview ─── -->
+  <section id="overview" class="section-light">
+    <div class="container">
+
+      <p class="section-eyebrow reveal">Project Overview</p>
+      <h2 class="section-title reveal">Five parts.<br>Zero hands required.</h2>
+      <p class="section-intro reveal">
+        TubStep™ is a precision-machined drain insert designed to eliminate hair clogs before they form —
+        without any user contact with the hair. Step down, walk away.
+      </p>
+
+      <!-- Stats -->
+      <div class="stats-row reveal">
+        <div class="stat-cell">
+          <div class="stat-number">5</div>
+          <div class="stat-label">Total Parts</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-number">1.5"</div>
+          <div class="stat-label">Outer Diameter</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-number">0</div>
+          <div class="stat-label">Hands Required</div>
+        </div>
+      </div>
+
+      <!-- Two-col: what it is + render -->
+      <div class="two-col overview-body reveal">
+        <div class="two-col-text">
+          <h3>What It Is</h3>
+          <p>
+            TubStep™ is a drain insert that fits into any standard 1.5" bathtub drain.
+            When a user steps on the device, an internal rotary blade mechanism activates
+            and cuts hair into small pieces — no touching required.
+          </p>
+          <p>
+            The device is made from five stainless steel 316 parts, fully precision machined
+            and assembled by hand. Installation requires no tools: drop it in, and it's ready.
+          </p>
+
+          <div class="divider"></div>
+
+          <h3>Why We Made It</h3>
+          <p>
+            Hair clogs are the #1 cause of residential drain blockages, affecting an estimated
+            40 million Americans. Existing solutions — like TubShroom and Press Drain — either
+            require users to handle accumulated hair, or fail to capture it at all.
+          </p>
+          <p>
+            TubStep doesn't collect hair. It shreds it. The pieces are small enough to flush
+            through the plumbing system without accumulating.
+          </p>
+
+          <div class="divider"></div>
+
+          <h3>How It Works</h3>
+          <p>
+            Foot pressure drives a cam mechanism that converts linear motion to shaft rotation.
+            The rotating shaft drives overlapping blades in a scissor-shear action, cutting hair
+            at the point of entry. When you lift your foot, a return spring resets the mechanism.
+            Water flushes the fragments down. The whole cycle takes under a second.
+          </p>
+        </div>
+
+        <div class="two-col-img">
+          <!--
+            This image shows the primary SolidWorks Visualize render of the assembled TubStep™ device,
+            illustrating the stainless steel finish and compact form factor designed to fit a standard 1.5" drain.
+          -->
+          <div class="img-placeholder" style="aspect-ratio: 3/4;">
+            <p>Primary render of assembled TubStep™ device<br><em>Replace with: assets/render-main.jpg</em></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ─── Section: Prototype Description ─── -->
+  <section id="prototype" class="section-dark">
+    <div class="container">
+
+      <p class="section-eyebrow reveal">Prototype Description</p>
+      <h2 class="section-title reveal">Inside the mechanism.</h2>
+      <p class="section-intro reveal">
+        Every component in TubStep™ serves a specific mechanical function. The five-part assembly
+        was designed for simplicity, machinability, and reliability under the repeated loading of
+        daily use. Below is a walk-through of each subsystem.
+      </p>
+
+      <!-- Demo video placeholder -->
+      <div class="proto-video-wrap reveal">
+        <p class="video-label">[ Full Demo Video ]</p>
+        <!--
+          REPLACE: Insert <video> tag or <iframe> embed for the full prototype demonstration video here.
+          The video should show the device being stepped on, the blade mechanism actuating, and
+          hair being shredded and flushed through the drain.
+          Example: <video src="assets/demo-video.mp4" controls poster="assets/demo-poster.jpg" style="width:100%;border-radius:4px;"></video>
+        -->
+        <div class="video-placeholder">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <circle cx="24" cy="24" r="23" stroke="#B0B8C1" stroke-width="1.5"/>
+            <path d="M19 16l14 8-14 8V16z" fill="#B0B8C1"/>
+          </svg>
+          <p>Full prototype demonstration video — replace this block with &lt;video&gt; or &lt;iframe&gt; embed</p>
+        </div>
+      </div>
+
+      <!-- Subsystem cards -->
+      <div class="subsystem-grid">
+
+        <!-- 01 Cam -->
+        <div class="subsystem-card reveal">
+          <div class="subsystem-img">
+            <!--
+              Photo of the cam mechanism isolated, showing the helical or eccentric cam profile
+              that converts the user's downward foot press into a rotational output at the shaft.
+            -->
+            <div class="img-placeholder" style="aspect-ratio:4/3;">
+              <p>Cam mechanism detail<br><em>Replace: assets/proto-cam.jpg</em></p>
+            </div>
+          </div>
+          <div class="subsystem-text">
+            <div class="sub-label">[ 01 / CAM MECHANISM ]</div>
+            <h3>The Cam</h3>
+            <p>
+              The cam is the heart of the motion-conversion system. When the user applies downward
+              foot pressure to the top face of the device, the cam translates that linear force into
+              rotation at the central shaft. The cam profile was designed to produce a full shearing
+              rotation within the travel range of a typical foot press — approximately 10–15 mm of
+              linear displacement.
+            </p>
+          </div>
+        </div>
+
+        <!-- 02 Blades -->
+        <div class="subsystem-card alt reveal reveal-delay-1">
+          <div class="subsystem-img">
+            <!--
+              Close-up photo of the rotary blade assembly showing the overlapping blade geometry
+              responsible for the scissor-shear cutting action.
+            -->
+            <div class="img-placeholder" style="aspect-ratio:4/3;">
+              <p>Rotary blade assembly<br><em>Replace: assets/proto-blades.jpg</em></p>
+            </div>
+          </div>
+          <div class="subsystem-text">
+            <div class="sub-label">[ 02 / ROTARY BLADES ]</div>
+            <h3>The Blades</h3>
+            <p>
+              The rotary blade assembly rotates with the keyed shaft. Shearing occurs at the
+              contact line where the rotating blades overlap with the fixed blade geometry —
+              a scissor-style shear that severs hair cleanly at the point of entry.
+              The blade geometry was validated through a razor blade proof-of-concept test
+              before the final stainless steel parts were machined.
+            </p>
+          </div>
+        </div>
+
+        <!-- 03 Spring + Nut -->
+        <div class="subsystem-card reveal reveal-delay-2">
+          <div class="subsystem-img">
+            <!--
+              Photo showing the return spring and adjustment nut on the shaft,
+              illustrating how the mechanism resets after each step.
+            -->
+            <div class="img-placeholder" style="aspect-ratio:4/3;">
+              <p>Return spring and adjustment nut<br><em>Replace: assets/proto-spring.jpg</em></p>
+            </div>
+          </div>
+          <div class="subsystem-text">
+            <div class="sub-label">[ 03 / SPRING + NUT ]</div>
+            <h3>The Spring &amp; Nut</h3>
+            <p>
+              A compression spring on the shaft provides the return force that resets the cam
+              and blades after each actuation. The adjustment nut allows the preload — and therefore
+              the return force — to be tuned at assembly. This also prevents hair from wrapping
+              and jamming the shaft over time, a failure mode observed in earlier prototypes.
+            </p>
+          </div>
+        </div>
+
+        <!-- 04 Bowl -->
+        <div class="subsystem-card alt reveal reveal-delay-3">
+          <div class="subsystem-img">
+            <!--
+              Photo of the outer bowl/housing component showing the geometry that
+              channels water and catches any hair fragments before they enter the plumbing.
+            -->
+            <div class="img-placeholder" style="aspect-ratio:4/3;">
+              <p>Outer bowl / housing<br><em>Replace: assets/proto-bowl.jpg</em></p>
+            </div>
+          </div>
+          <div class="subsystem-text">
+            <div class="sub-label">[ 04 / OUTER BOWL ]</div>
+            <h3>The Bowl</h3>
+            <p>
+              The outer bowl serves as the structural housing and water-management component.
+              Its geometry channels water flow through the blade region while collecting any
+              larger hair fragments before they reach the trap. The 1.5" outer diameter
+              matches standard residential bathtub drains, requiring no modification for installation.
+            </p>
+          </div>
+        </div>
+
+        <!-- 05 Full Assembly -->
+        <div class="subsystem-card reveal reveal-delay-4">
+          <div class="subsystem-img">
+            <!--
+              Photo of the fully assembled TubStep™ prototype, all five parts together,
+              showing the finished device as it would appear in a drain.
+            -->
+            <div class="img-placeholder" style="aspect-ratio:4/3;">
+              <p>Fully assembled prototype<br><em>Replace: assets/proto-assembled.jpg</em></p>
+            </div>
+          </div>
+          <div class="subsystem-text">
+            <div class="sub-label">[ 05 / FULL ASSEMBLY ]</div>
+            <h3>Full Assembly</h3>
+            <p>
+              Five stainless steel 316 parts. Fully machined. Assembled by hand in minutes.
+              The assembled device sits flush in a standard drain and is ready to use immediately —
+              no adhesives, no fasteners beyond the adjustment nut, no modifications to the plumbing.
+              The entire mechanism is accessible for inspection or cleaning by simply lifting it out.
+            </p>
+          </div>
+        </div>
+
+      </div><!-- /subsystem-grid -->
+    </div>
+  </section>
+
+
+  <!-- ─── Section: Prior Art ─── -->
+  <section id="prior-art" class="section-dark" style="background:#252420;">
+    <div class="container">
+
+      <p class="section-eyebrow reveal">Literature Search &amp; Prior Art</p>
+      <h2 class="section-title reveal">The problem is real.<br>The solutions aren't.</h2>
+
+      <!-- Intro stats + text -->
+      <div class="prior-art-intro reveal">
+        <div>
+          <div class="pa-stat-num">40M</div>
+          <div class="pa-stat-label">Americans with frequent drain clogs</div>
+          <div class="pa-stat-num" style="margin-top:32px;">#1</div>
+          <div class="pa-stat-label">Cause of residential drain blockages</div>
+        </div>
+        <div class="pa-body">
+          <p>
+            Hair accumulation in residential drains is the leading cause of blockages in bathtubs
+            and showers. Roughly 40 million Americans report dealing with frequent drain clogs,
+            creating a persistent maintenance burden and a substantial market for drain solutions.
+          </p>
+          <p>
+            The existing market is dominated by passive collection devices — products that trap hair
+            and require users to periodically remove and dispose of accumulated waste. These solutions
+            shift the problem rather than solving it, and nearly all require direct contact with
+            wet, tangled hair.
+          </p>
+          <p>
+            TubStep™ takes a different approach: active elimination rather than passive collection.
+            By shredding hair at the point of entry, the problem never accumulates.
+          </p>
+        </div>
+      </div>
+
+      <!-- Comparison table -->
+      <div class="reveal">
+        <p class="video-label" style="margin-bottom:20px;">[ Competitive Analysis ]</p>
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>What's Good</th>
+              <th>What's Bad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="Product"><strong>Press Drain</strong></td>
+              <td data-label="What's Good" class="good">Simple design; one-step actuation</td>
+              <td data-label="What's Bad" class="bad">Cosmetic "drain" look only; doesn't catch or eliminate hair; largely ineffective against clogging</td>
+            </tr>
+            <tr>
+              <td data-label="Product"><strong>TubShroom</strong></td>
+              <td data-label="What's Good" class="good">Does capture hair; widely available; inexpensive</td>
+              <td data-label="What's Bad" class="bad">Requires user to handle accumulated hair; high maintenance frequency; widely cited as unpleasant to clean</td>
+            </tr>
+            <tr class="tubstep-row">
+              <td data-label="Product"><strong>TubStep™</strong></td>
+              <td data-label="What's Good" class="good">Hands-free; one-step; actively shreds hair; 5 precision parts; tested multi-blade cutting</td>
+              <td data-label="What's Bad">—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Differentiators -->
+      <div class="pa-differentiators reveal">
+        <div class="diff-item">
+          <div class="diff-icon">[ 01 ]</div>
+          <p><strong style="color:var(--text-light);">Active shredding, not passive collection.</strong> Hair is eliminated at entry rather than accumulated for later removal.</p>
+        </div>
+        <div class="diff-item">
+          <div class="diff-icon">[ 02 ]</div>
+          <p><strong style="color:var(--text-light);">Truly hands-free.</strong> Foot-activated mechanism means zero user contact with hair at any point in the process.</p>
+        </div>
+        <div class="diff-item">
+          <div class="diff-icon">[ 03 ]</div>
+          <p><strong style="color:var(--text-light);">Validated cutting mechanism.</strong> Multi-blade rotary shear was tested via razor blade proof-of-concept before machining final parts.</p>
+        </div>
+        <div class="diff-item">
+          <div class="diff-icon">[ 04 ]</div>
+          <p><strong style="color:var(--text-light);">Minimal parts, easy installation.</strong> Five total components. Drops into any standard 1.5" drain. No tools, no modifications.</p>
+        </div>
+      </div>
+
+      <!-- Patent/publication placeholder -->
+      <!--
+        REPLACE: Add any patent numbers or publications referenced in literature search here.
+        Format suggested: <p class="pa-body"><strong>References:</strong> US Patent XXXXXXX, etc.</p>
+      -->
+
+    </div>
+  </section>
+
+
+  <!-- ─── Section: Exploded View ─── -->
+  <section id="exploded" class="section-dark">
+    <div class="container">
+
+      <p class="section-eyebrow reveal">Exploded View</p>
+      <h2 class="section-title reveal">Every part. Every purpose.</h2>
+      <p class="section-intro reveal">
+        The TubStep™ assembly consists of five precision-machined stainless steel 316 components.
+        The exploded view below identifies each part and its role in the mechanism.
+      </p>
+
+      <div class="exploded-layout reveal">
+        <div class="exploded-img">
+          <!--
+            REPLACE: Use SolidWorks Visualize exploded view export.
+            The image should show all five components separated along the assembly axis
+            with leader lines or numbers corresponding to the legend.
+          -->
+          <div class="img-placeholder" style="aspect-ratio:4/3;">
+            <p>SolidWorks Visualize exploded view — all five components labeled along assembly axis<br><em>Replace: assets/exploded-view.jpg</em></p>
+          </div>
+        </div>
+
+        <div class="component-legend">
+          <p class="video-label" style="margin-bottom:20px;">[ Component Legend ]</p>
+          <ol>
+            <li>
+              <div>
+                <div class="legend-name">Retaining Bolt</div>
+                <div class="legend-desc">Secures the assembly and sets the axial preload on the spring.</div>
+              </div>
+            </li>
+            <li>
+              <div>
+                <div class="legend-name">Keyed Shaft</div>
+                <div class="legend-desc">Central rotating member that transmits cam output to the blade assembly.</div>
+              </div>
+            </li>
+            <li>
+              <div>
+                <div class="legend-name">Rotary Blade Assembly</div>
+                <div class="legend-desc">Overlapping blade geometry that shears hair in a scissor action when rotated.</div>
+              </div>
+            </li>
+            <li>
+              <div>
+                <div class="legend-name">Return Spring</div>
+                <div class="legend-desc">Compression spring that resets the mechanism after each foot press.</div>
+              </div>
+            </li>
+            <li>
+              <div>
+                <div class="legend-name">Outer Bowl / Housing</div>
+                <div class="legend-desc">Structural housing that interfaces with the drain and channels water flow through the blade zone.</div>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ─── Section: Analysis ─── -->
+  <section id="analysis" class="section-light">
+    <div class="container">
+
+      <p class="section-eyebrow reveal">Simulations &amp; Experiments</p>
+      <h2 class="section-title reveal">Engineering the<br>details.</h2>
+      <p class="section-intro reveal">
+        Three quantitative studies informed key design decisions in TubStep™ — from blade geometry
+        to dimensional compliance with federal safety standards.
+      </p>
+
+      <div class="analysis-cards">
+
+        <!-- Study 1: Water Flow -->
+        <div class="analysis-card reveal">
+          <div class="analysis-card-header">
+            <span class="ac-label">[ STUDY 01 / FLUID MECHANICS ]</span>
+            <span class="ac-title">Minimum Drain Area for Water Flow</span>
+          </div>
+          <div class="analysis-card-body">
+            <div class="ac-text">
+              <div class="qmrd">
+                <div class="qmrd-item">
+                  <div class="qmrd-label">Question</div>
+                  <p>How much open drain area is required to prevent water backup during normal shower use?</p>
+                </div>
+                <div class="qmrd-item">
+                  <div class="qmrd-label">Method</div>
+                  <p>
+                    Shower flow capped at 0.158 kg/s per code. Assumed 1 inch of hydrostatic head pressure.
+                    Applied pressure-driven flow equations to calculate minimum open area through the drain
+                    geometry with a factor of safety of 1.5.
+                  </p>
+                </div>
+                <div class="qmrd-item">
+                  <div class="qmrd-label">Result</div>
+                  <div class="result-highlight">0.869 in²</div>
+                  <div class="result-sub">minimum open area &nbsp;·&nbsp; equivalent diameter: 1.052"</div>
+                </div>
+                <div class="qmrd-item">
+                  <div class="qmrd-label">Design Decision</div>
+                  <p>
+                    TubStep™ blade geometry was designed to maintain more than 0.869 in² of open area
+                    in every possible blade position — including worst-case rotation angles.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="ac-img">
+              <!--
+                Diagram or screenshot from the water flow analysis showing the pressure-driven flow
+                calculation, drain geometry cross-section, and annotated minimum open area result.
+              -->
+              <div class="img-placeholder">
+                <p>Water flow analysis diagram — annotated drain geometry and open area calculation<br><em>Replace: assets/analysis-flow.jpg</em></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Study 2: Blade Shear -->
+        <div class="analysis-card reveal reveal-delay-1">
+          <div class="analysis-card-header">
+            <span class="ac-label">[ STUDY 02 / MECHANICS OF MATERIALS ]</span>
+            <span class="ac-title">Blade Shear Force &amp; Scissor Mechanics</span>
+          </div>
+          <div class="analysis-card-body">
+            <div class="ac-text">
+              <div class="qmrd">
+                <div class="qmrd-item">
+                  <div class="qmrd-label">Question</div>
+                  <p>What blade geometry produces effective and reliable hair shearing under realistic foot-pressure loads?</p>
+                </div>
+                <div class="qmrd-item">
+                  <div class="qmrd-label">Method</div>
+                  <p>
+                    Blade interaction modeled as scissor-style shearing — shear force concentrated at the
+                    contact line between overlapping blades. A razor blade proof-of-concept prototype was
+                    built and tested to validate the cutting force and geometry before final parts were machined.
+                  </p>
+                </div>
+                <div class="qmrd-item">
+                  <div class="qmrd-label">Result</div>
+                  <div class="result-highlight">Rotary V2</div>
+                  <div class="result-sub">design confirmed — clean shear at blade overlap under foot-load</div>
+                </div>
+                <div class="qmrd-item">
+                  <div class="qmrd-label">Design Decision</div>
+                  <p>
+                    The rotary V2 overlapping-blade design was selected over a linear reciprocating blade
+                    approach. The rotary method produces a more consistent shear contact line and requires
+                    lower peak force to initiate cutting.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="ac-img">
+              <!--
+                Diagram or photograph from the blade shear study, showing either the razor blade
+                proof-of-concept, the scissor mechanics diagram, or the blade overlap geometry
+                with annotated shear contact line.
+              -->
+              <div class="img-placeholder">
+                <p>Blade shear study — scissor mechanics diagram or razor blade proof-of-concept photo<br><em>Replace: assets/analysis-blades.jpg</em></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Study 3: Standards -->
+        <div class="analysis-card reveal reveal-delay-2">
+          <div class="analysis-card-header">
+            <span class="ac-label">[ STUDY 03 / STANDARDS COMPLIANCE ]</span>
+            <span class="ac-title">Safety &amp; Dimensional Standards</span>
+          </div>
+          <div class="analysis-card-body">
+            <div class="ac-text">
+              <div class="qmrd">
+                <div class="qmrd-item">
+                  <div class="qmrd-label">Question</div>
+                  <p>Does TubStep™ meet applicable federal, ASME, and ASTM standards for dimensional and safety compliance?</p>
+                </div>
+                <div class="qmrd-item">
+                  <div class="qmrd-label">Method</div>
+                  <p>Checked TubStep™ dimensions against four applicable standards:</p>
+                  <ul class="standards-list">
+                    <li>
+                      <span class="check">✓</span>
+                      <div>
+                        <span class="std-code">ASME A112.18.2 §4.6.1.2</span><br>
+                        Min. 1.5" nominal OD for bathtub drains — TubStep: <strong>1.5"</strong>
+                      </div>
+                    </li>
+                    <li>
+                      <span class="check">✓</span>
+                      <div>
+                        <span class="std-code">ASTM A554-21 Table 2</span><br>
+                        Wall thickness 0.025"–0.134" for 1.5" OD steel — TubStep: <strong>0.095"</strong>
+                      </div>
+                    </li>
+                    <li>
+                      <span class="check">✓</span>
+                      <div>
+                        <span class="std-code">CFR 16 §1500.49</span><br>
+                        Blade gaps must be &lt; 0.34" — TubStep: <strong>0.337"</strong>
+                      </div>
+                    </li>
+                    <li>
+                      <span class="check">✓</span>
+                      <div>
+                        <span class="std-code">ASTM F409-22</span><br>
+                        Material &amp; wall thickness for tubular plumbing components — <strong>Pass</strong>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div class="qmrd-item">
+                  <div class="qmrd-label">Result</div>
+                  <div class="result-highlight">4 / 4</div>
+                  <div class="result-sub">all standards checks pass &nbsp;·&nbsp; blade gaps ≤ 0.337"</div>
+                </div>
+                <div class="qmrd-item">
+                  <div class="qmrd-label">Design Decision</div>
+                  <p>
+                    Razor blades were eliminated from the final design in favor of the machined rotary
+                    mechanism, which naturally constrains all blade-access gaps to ≤ 0.337" — meeting
+                    the CPSC safety rule with 0.003" margin.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="ac-img">
+              <!--
+                Table, diagram, or annotated screenshot summarizing the four standards checks,
+                with TubStep dimensions compared against each standard's requirement.
+              -->
+              <div class="img-placeholder">
+                <p>Standards compliance summary — annotated dimensional comparison table<br><em>Replace: assets/analysis-standards.jpg</em></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /analysis-cards -->
+    </div>
+  </section>
+
+
+  <!-- ─── Section: Team ─── -->
+  <section id="team" class="section-light" style="background:#c4bfb6;">
+    <div class="container">
+
+      <p class="section-eyebrow reveal">The Team</p>
+      <h2 class="section-title reveal">Team 11.</h2>
+      <p class="section-intro reveal">
+        Columbia University · MECE E3430 · Senior Design · Spring 2026
+      </p>
+
+      <div class="team-grid reveal">
+
+        <!-- Joe -->
+        <div class="team-card">
+          <div class="team-photo placeholder">
+            <!--
+              Replace contents of this div with:
+              <img src="assets/team-joe.jpg" alt="Photo of Joe" />
+              and remove class="placeholder" from the parent div
+            -->
+            <span>J</span>
+          </div>
+          <div class="team-name">Joe</div>
+          <!-- REPLACE: Add short bio for Joe here -->
+          <p class="team-bio">Columbia Mechanical Engineering. Bio placeholder — two sentences describing Joe's role and background on the TubStep team.</p>
+        </div>
+
+        <!-- Sam -->
+        <div class="team-card">
+          <div class="team-photo placeholder">
+            <!--
+              Replace contents of this div with:
+              <img src="assets/team-sam.jpg" alt="Photo of Sam" />
+            -->
+            <span>S</span>
+          </div>
+          <div class="team-name">Sam</div>
+          <!-- REPLACE: Add short bio for Sam here -->
+          <p class="team-bio">Columbia Mechanical Engineering. Bio placeholder — two sentences describing Sam's role and background on the TubStep team.</p>
+        </div>
+
+        <!-- Theo -->
+        <div class="team-card">
+          <div class="team-photo placeholder">
+            <!--
+              Replace contents of this div with:
+              <img src="assets/team-theo.jpg" alt="Photo of Theo" />
+            -->
+            <span>T</span>
+          </div>
+          <div class="team-name">Theo</div>
+          <!-- REPLACE: Add short bio for Theo here -->
+          <p class="team-bio">Columbia Mechanical Engineering. Bio placeholder — two sentences describing Theo's role and background on the TubStep team.</p>
+        </div>
+
+        <!-- Zach -->
+        <div class="team-card">
+          <div class="team-photo placeholder">
+            <!--
+              Replace contents of this div with:
+              <img src="assets/team-zach.jpg" alt="Photo of Zach" />
+            -->
+            <span>Z</span>
+          </div>
+          <div class="team-name">Zach</div>
+          <!-- REPLACE: Add short bio for Zach here -->
+          <p class="team-bio">Columbia Mechanical Engineering. Bio placeholder — two sentences describing Zach's role and background on the TubStep team.</p>
+        </div>
+
+        <!-- Zoee -->
+        <div class="team-card">
+          <div class="team-photo placeholder">
+            <!--
+              Replace contents of this div with:
+              <img src="assets/team-zoee.jpg" alt="Photo of Zoee" />
+            -->
+            <span>Z</span>
+          </div>
+          <div class="team-name">Zoee</div>
+          <!-- REPLACE: Add short bio for Zoee here -->
+          <p class="team-bio">Columbia Mechanical Engineering. Bio placeholder — two sentences describing Zoee's role and background on the TubStep team.</p>
+        </div>
+
+      </div><!-- /team-grid -->
+    </div>
+  </section>
+
+
+  <!-- ─── Footer ─── -->
+  <footer>
+    <div class="footer-wordmark">TubStep<span>™</span></div>
+    <div class="footer-divider"></div>
+    <p class="footer-meta">Columbia University &nbsp;·&nbsp; MECE E3430 &nbsp;·&nbsp; Senior Design &nbsp;·&nbsp; Spring 2026 &nbsp;·&nbsp; Team 11</p>
+    <p class="footer-members">Joe &nbsp;·&nbsp; Sam &nbsp;·&nbsp; Theo &nbsp;·&nbsp; Zach &nbsp;·&nbsp; Zoee</p>
+  </footer>
+
+
+  <script>
+    // ─── Nav: scroll border + hamburger ───
+    const nav = document.getElementById('main-nav');
+    const navToggle = document.getElementById('nav-toggle');
+    const navLinks  = document.getElementById('nav-links');
+
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('open');
+      navLinks.classList.toggle('open');
+    });
+
+    // Close mobile menu on link click
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        navToggle.classList.remove('open');
+        navLinks.classList.remove('open');
+      });
+    });
+
+    // ─── Scroll-reveal via IntersectionObserver ───
+    const revealEls = document.querySelectorAll('.reveal');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    revealEls.forEach(el => observer.observe(el));
+
+    // Make hero elements visible immediately (above fold)
+    document.querySelectorAll('#hero .reveal').forEach(el => {
+      el.classList.add('visible');
+    });
+
+    // ─── Hero parallax ───
+    const hero = document.getElementById('hero');
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      if (y < hero.offsetHeight) {
+        hero.style.backgroundPosition = `50% ${y * 0.4}px`;
+      }
+    }, { passive: true });
+  </script>
+
+</body>
+</html>

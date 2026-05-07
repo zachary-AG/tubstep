@@ -528,16 +528,21 @@
 
     /* ─── Competitor cards ─── */
     .competitor-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 20px;
       margin-bottom: 48px;
     }
+    .competitor-card {
+      flex: 0 1 calc(33.333% - 14px);
+      min-width: 220px;
+    }
     @media (max-width: 900px) {
-      .competitor-grid { grid-template-columns: repeat(2, 1fr); }
+      .competitor-card { flex: 0 1 calc(50% - 10px); }
     }
     @media (max-width: 560px) {
-      .competitor-grid { grid-template-columns: 1fr; }
+      .competitor-card { flex: 0 1 100%; }
     }
 
     .competitor-card {
@@ -625,10 +630,22 @@
 
     /* ─── Exploded View ─── */
     .exploded-layout {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
+      display: flex;
+      flex-direction: row;
       gap: 64px;
-      align-items: start;
+      align-items: center;
+    }
+    .exploded-img {
+      flex: 1;
+    }
+    .exploded-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+    }
+    .component-legend {
+      flex: 1;
     }
     @media (max-width: 768px) {
       .exploded-layout { grid-template-columns: 1fr; gap: 40px; }
@@ -640,35 +657,6 @@
       list-style: none;
       padding: 0;
       counter-reset: legend-counter;
-    }
-    .component-legend li {
-      counter-increment: legend-counter;
-      display: flex;
-      align-items: baseline;
-      gap: 14px;
-      padding: 16px 0;
-      border-bottom: 1px solid rgba(140,136,128,0.15);
-    }
-    .component-legend li:last-child { border-bottom: none; }
-    .component-legend li::before {
-      content: "0" counter(legend-counter);
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      color: var(--steel);
-      letter-spacing: 0.1em;
-      flex-shrink: 0;
-      min-width: 24px;
-    }
-    .legend-name {
-      font-size: 0.92rem;
-      font-weight: 500;
-      color: var(--text-light);
-      margin-bottom: 4px;
-    }
-    .legend-desc {
-      font-size: 0.8rem;
-      color: rgba(200, 194, 180, 0.5);
-      line-height: 1.55;
     }
 
     /* ─── Analysis / Simulations ─── */
@@ -880,6 +868,52 @@
       margin: 24px auto;
     }
 
+    /* ─── Overview stacked layout ─── */
+    .overview-img {
+      margin-bottom: 48px;
+      display: inline-block;
+    }
+    .overview-text-cols {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ─── Component legend ─── */
+    .component-legend ol {
+      list-style: none;
+      padding: 0;
+      counter-reset: legend-counter;
+    }
+    .legend-item {
+      counter-increment: legend-counter;
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(140,136,128,0.15);
+    }
+    .legend-item:last-child { border-bottom: none; }
+    .legend-item::before {
+      content: "0" counter(legend-counter);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--steel);
+      letter-spacing: 0.1em;
+      flex-shrink: 0;
+      min-width: 24px;
+    }
+    .legend-name {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--text-light);
+      margin-bottom: 4px;
+    }
+    .legend-desc {
+      font-size: 0.8rem;
+      color: rgba(200, 194, 180, 0.5);
+      line-height: 1.55;
+    }
+
     /* ─── Utility ─── */
     .divider {
       height: 1px;
@@ -937,68 +971,55 @@
     <div class="container">
 
       <p class="section-eyebrow reveal">Project Overview</p>
-      <h2 class="section-title reveal">Ten parts.<br>Zero hands required.</h2>
+      <h2 class="section-title reveal">Zero hands required.</h2>
       <p class="section-intro reveal">
         TubStep™ is a precision-machined drain insert designed to eliminate hair clogs before they form —
         without any user contact with the hair. Step down, walk away.
       </p>
 
-      <!-- Stats -->
-      <div class="stats-row reveal">
-        <div class="stat-cell">
-          <div class="stat-number">5</div>
-          <div class="stat-label">Total Parts</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-number">1.5"</div>
-          <div class="stat-label">Outer Diameter</div>
-        </div>
-        <div class="stat-cell">
-          <div class="stat-number">0</div>
-          <div class="stat-label">Hands Required</div>
-        </div>
-      </div>
+      
 
-      <!-- Two-col: what it is + render -->
-      <div class="two-col overview-body reveal" style="grid-template-columns: 1fr 1.4fr; align-items: start;">
-        <div class="two-col-text">
-          <h3>What It Is</h3>
-          <p>
-            TubStep™ is a drain insert that fits into any standard 1.5" bathtub drain.
-            When a user steps on the device, an internal rotary blade mechanism activates
-            and cuts hair into small pieces — no touching required.
-          </p>
-          <p>
-            The device is made from five stainless steel 316 parts, fully precision machined
-            and assembled by hand. Installation requires no tools: drop it in, and it's ready.
-          </p>
-
+      <!-- Overview: image top, text below -->
+      <div class="overview-body reveal">
+        <div class="overview-img">
+          <img src="render main 2.JPG" alt="TubStep™ device render" style="display:block;max-width:100%;height:auto;border-radius:12px;" />
+        </div>
+        <div class="overview-text-cols">
+          <div class="two-col-text">
+            <h3>What It Is</h3>
+            <p>
+              TubStep™ is a drain insert that fits into any standard 1.5" bathtub drain.
+              When a user steps on the device, an internal rotary blade mechanism activates
+              and cuts hair into small pieces — no touching required.
+            </p>
+            <p>
+              The device is made from ten stainless steel 316 parts, fully precision machined
+              and assembled by hand. Installation requires no tools: drop it in, and it's ready.
+            </p>
+          </div>
           <div class="divider"></div>
-
-          <h3>Why We Made It</h3>
-          <p>
-            Hair clogs are the #1 cause of residential drain blockages, affecting an estimated
-            40 million Americans. Existing solutions — like TubShroom and Press Drain — either
-            require users to handle accumulated hair, or fail to capture it at all.
-          </p>
-          <p>
-            TubStep doesn't collect hair. It shreds it. The pieces are small enough to flush
-            through the plumbing system without accumulating.
-          </p>
-
+          <div class="two-col-text">
+            <h3>Why We Made It</h3>
+            <p>
+              Hair clogs are the #1 cause of residential drain blockages, affecting an estimated
+              40 million Americans. Existing solutions — like TubShroom and Press Drain — either
+              require users to handle accumulated hair, or fail to capture it at all.
+            </p>
+            <p>
+              TubStep doesn't collect hair. It shreds it. The pieces are small enough to flush
+              through the plumbing system without accumulating.
+            </p>
+          </div>
           <div class="divider"></div>
-
-          <h3>How It Works</h3>
-          <p>
-            Foot pressure drives a cam mechanism that converts linear motion to shaft rotation.
-            The rotating shaft drives overlapping blades in a scissor-shear action, cutting hair
-            at the point of entry. When you lift your foot, a return spring resets the mechanism.
-            Water flushes the fragments down. The whole cycle takes under a second.
-          </p>
-        </div>
-
-        <div class="two-col-img" style="position:sticky;top:130px;">
-          <img src="render main 2.JPG" alt="TubStep™ device render" style="width:100%;display:block;object-fit:contain;border-radius:12px;" />
+          <div class="two-col-text">
+            <h3>How It Works</h3>
+            <p>
+              Foot pressure drives a cam mechanism that converts linear motion to shaft rotation.
+              The rotating shaft drives overlapping blades in a scissor-shear action, cutting hair
+              at the point of entry. When you lift your foot, a return spring resets the mechanism.
+              Water flushes the fragments down. The whole cycle takes under a second.
+            </p>
+          </div>
         </div>
       </div>
 
@@ -1013,17 +1034,14 @@
       <p class="section-eyebrow reveal">Prototype Description</p>
       <h2 class="section-title reveal">Inside the mechanism.</h2>
       <p class="section-intro reveal">
-        Every component in TubStep™ serves a specific mechanical function. The ten-part assembly
-        was designed for simplicity, machinability, and reliability under the repeated loading of
-        daily use. Below is a walk-through of each subsystem.
+        TubStep™ is built around four core mechanical systems. Each one was designed from first
+        principles to be reliable, safe, and manufacturable from stainless steel 316 — no electronics,
+        no chemicals, no maintenance.
       </p>
 
       <!-- Demo video placeholder -->
       <div class="proto-video-wrap reveal">
         <p class="video-label">[ Full Demo Video ]</p>
-        <!--
-          REPLACE: Insert <video> tag or <iframe> embed for the full prototype demonstration video here.
-        -->
         <div class="video-placeholder">
           <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
             <circle cx="24" cy="24" r="23" stroke="#B0B8C1" stroke-width="1.5"/>
@@ -1033,165 +1051,99 @@
         </div>
       </div>
 
-      <!-- Subsystem cards -->
+      <!-- Four-subsystem narrative -->
       <div class="subsystem-grid">
 
-        <!-- 01 Top -->
+        <!-- 01 Rotating Blades -->
         <div class="subsystem-card reveal">
           <div class="subsystem-img">
-            <img src="cap.JPG" alt="Top — stepping surface" style="width:100%;aspect-ratio:4/3;object-fit:cover;" />
+            <img src="Pressing top.webp" alt="Rotating blades" style="width:100%;aspect-ratio:4/3;object-fit:cover;" />
           </div>
           <div class="subsystem-text">
-            <div class="sub-label">[ 01 / TOP ]</div>
-            <h3>The Top</h3>
+            <div class="sub-label">[ 01 / CUTTING ]</div>
+            <h3>Rotating Blades</h3>
             <p>
-              The top is the floor-level stepping surface of TubStep™. The user places their foot
-              on it directly, transmitting their body weight downward through the mechanism and
-              toward the target drain opening below.
+              When the shaft turns, the rotating blade assembly sweeps through the drain opening,
+              severing any hair at the point of entry. The blades are machined with an overlapping
+              geometry that concentrates shear force at a precise contact line — ensuring a clean,
+              reliable cut with every step, without pulling or tangling.
             </p>
           </div>
         </div>
 
-        <!-- 02 Body -->
+        <!-- 02 Cam Shaft -->
         <div class="subsystem-card alt reveal reveal-delay-1">
           <div class="subsystem-img">
-            <img src="body.JPG" alt="Body — outer housing" style="width:100%;aspect-ratio:4/3;object-fit:cover;" />
+            <img src="cam.webp" alt="Cam shaft" style="width:100%;aspect-ratio:4/3;object-fit:cover;" />
           </div>
           <div class="subsystem-text">
-            <div class="sub-label">[ 02 / BODY ]</div>
-            <h3>The Body</h3>
+            <div class="sub-label">[ 02 / MOTION CONVERSION ]</div>
+            <h3>Cam Shaft</h3>
             <p>
-              The body is the main structural housing of the device. It contains and aligns all
-              internal components, channels water through the blade region, and interfaces with
-              the standard bathtub drain opening — no plumbing modification required.
+              The cam shaft is the mechanical heart of TubStep™. It converts the linear
+              downward force of a foot press into rotation at the blade shaft — a classic
+              cam-follower mechanism adapted for the compact geometry of a drain insert.
+              A single step produces a full shearing stroke. The cam geometry is tuned so
+              the full rotation occurs within the natural travel range of a foot press,
+              requiring no conscious effort from the user beyond simply stepping down.
             </p>
           </div>
         </div>
 
-        <!-- 03 Cam -->
+        <!-- 03 Spring -->
         <div class="subsystem-card reveal reveal-delay-2">
           <div class="subsystem-img">
-            <img src="cam.JPG" alt="Cam — motion converter" style="width:100%;aspect-ratio:4/3;object-fit:cover;" />
+            <img src="spring.webp" alt="Return spring" style="width:100%;aspect-ratio:4/3;object-fit:cover;" />
           </div>
           <div class="subsystem-text">
-            <div class="sub-label">[ 03 / CAM ]</div>
-            <h3>The Cam</h3>
+            <div class="sub-label">[ 03 / RESET ]</div>
+            <h3>Return Spring</h3>
             <p>
-              The cam is the heart of the motion-conversion system. When the user presses down on
-              the top, the cam translates that linear force into rotation at the central shaft —
-              producing a full shearing stroke within the travel range of a typical foot press.
+              A compression spring runs through the center of the assembly, storing energy
+              as the user steps down and releasing it the moment pressure lifts — pushing
+              the top back to its resting position automatically. The spring rate was selected
+              to provide a firm, comfortable underfoot feel: enough resistance to feel solid,
+              not so much that stepping requires noticeable effort. It resets the mechanism
+              in under a second, leaving TubStep™ ready for the next use with no user input.
             </p>
           </div>
         </div>
 
-        <!-- 04 Rotating Blades -->
+        <!-- 04 Thrust Bearing -->
         <div class="subsystem-card alt reveal reveal-delay-3">
           <div class="subsystem-img">
-            <img src="Rotating blades.JPG" alt="Rotating blades" style="width:100%;aspect-ratio:4/3;object-fit:cover;" />
+            <img src="Bearing.webp" alt="Water-resistant bearing" style="width:100%;aspect-ratio:4/3;object-fit:cover;" />
           </div>
           <div class="subsystem-text">
-            <div class="sub-label">[ 04 / ROTATING BLADES ]</div>
-            <h3>The Rotating Blades</h3>
+            <div class="sub-label">[ 04 / ROTATION ]</div>
+            <h3>Water-Resistant Bearing</h3>
             <p>
-              These are the blades that actually spin when the user steps down. Driven by the cam,
-              they rotate against the fixed sleeves to create a scissor-shear action that severs
-              hair cleanly at the drain opening.
+              A sealed, water-resistant thrust bearing supports the rotating shaft under the
+              axial load of a foot press while allowing it to spin freely. Washers on either
+              side distribute the load evenly and prevent metal-on-metal contact between
+              rotating and stationary surfaces. Together, they ensure the blade assembly
+              rotates smoothly with every step — even under the full weight of an adult —
+              without binding, wear, or degradation from the wet drain environment.
             </p>
           </div>
         </div>
 
-        <!-- 05 Fixed Blades -->
+        <!-- 05 Putting It All Together -->
         <div class="subsystem-card reveal reveal-delay-4">
           <div class="subsystem-img">
-            <img src="Fixed Blades.JPG" alt="Fixed blades — shear surface" style="width:100%;aspect-ratio:4/3;object-fit:cover;" />
+            <img src="all together.webp" alt="TubStep™ fully assembled" style="width:100%;aspect-ratio:4/3;object-fit:cover;" />
           </div>
           <div class="subsystem-text">
-            <div class="sub-label">[ 05 / FIXED BLADES ]</div>
-            <h3>The Fixed Blades</h3>
+            <div class="sub-label">[ 05 / ASSEMBLY ]</div>
+            <h3>Putting It All Together</h3>
             <p>
-              The fixed blades sit inside the body and provide a stationary shear surface for the
-              rotating blades to cut against. This scissor-style interface ensures hair is severed
-              cleanly — nothing passes through uncut.
-            </p>
-          </div>
-        </div>
-
-        <!-- 06 Spring -->
-        <div class="subsystem-card alt reveal">
-          <div class="subsystem-img">
-            <img src="spring.JPG" alt="Return spring" style="width:100%;aspect-ratio:4/3;object-fit:cover;" />
-          </div>
-          <div class="subsystem-text">
-            <div class="sub-label">[ 06 / SPRING ]</div>
-            <h3>The Spring</h3>
-            <p>
-              A compression spring running through the center of the assembly stores energy on the
-              downstroke and releases it to lift the top back to its resting position after each
-              step — resetting the mechanism automatically.
-            </p>
-          </div>
-        </div>
-
-        <!-- 07 Spring Shell -->
-        <div class="subsystem-card reveal reveal-delay-1">
-          <div class="subsystem-img">
-            <img src="Spring Shell.JPG" alt="Spring shell" style="width:100%;aspect-ratio:4/3;object-fit:cover;" />
-          </div>
-          <div class="subsystem-text">
-            <div class="sub-label">[ 07 / SPRING SHELL ]</div>
-            <h3>The Spring Shell</h3>
-            <p>
-              The spring shell encases the return spring, protecting it from water, hair, and debris
-              that could cause binding or corrosion over time. It ensures the spring operates cleanly
-              within its designed travel range.
-            </p>
-          </div>
-        </div>
-
-        <!-- 08 Water-Resistant Bearing -->
-        <div class="subsystem-card alt reveal reveal-delay-2">
-          <div class="subsystem-img">
-            <img src="bearing.JPG" alt="Water-resistant bearing" style="width:100%;aspect-ratio:4/3;object-fit:cover;" />
-          </div>
-          <div class="subsystem-text">
-            <div class="sub-label">[ 08 / BEARING ]</div>
-            <h3>The Water-Resistant Bearing</h3>
-            <p>
-              Seated in the body near the blade assembly, the water-resistant bearing supports the
-              rotating shaft and reduces friction under load. Its sealed construction keeps it
-              functional in the wet, hair-laden drain environment.
-            </p>
-          </div>
-        </div>
-
-        <!-- 09 Shaft Collar -->
-        <div class="subsystem-card reveal reveal-delay-3">
-          <div class="subsystem-img">
-            <img src="shaft collar.JPG" alt="Shaft collar" style="width:100%;aspect-ratio:4/3;object-fit:cover;" />
-          </div>
-          <div class="subsystem-text">
-            <div class="sub-label">[ 09 / SHAFT COLLAR ]</div>
-            <h3>The Shaft Collar</h3>
-            <p>
-              Located at the very bottom of the assembly, the shaft collar locks the cam axially,
-              preventing it from sliding off the shaft during operation. It is the final retention
-              point that keeps the entire drive train in alignment.
-            </p>
-          </div>
-        </div>
-
-        <!-- 10 Force Transmitter -->
-        <div class="subsystem-card alt reveal reveal-delay-4">
-          <div class="subsystem-img">
-            <img src="force transmitter.JPG" alt="Force transmitter" style="width:100%;aspect-ratio:4/3;object-fit:cover;" />
-          </div>
-          <div class="subsystem-text">
-            <div class="sub-label">[ 10 / FORCE TRANSMITTER ]</div>
-            <h3>The Force Transmitter</h3>
-            <p>
-              The force transmitter is the connector between the cam and the rotating blades.
-              It takes the rotational output of the cam and delivers it directly to the blade
-              assembly — the critical middle link that turns a foot press into a cutting stroke.
+              All four subsystems combine into a single ten-part assembly that drops into any
+              standard 1.5" bathtub drain — no tools, no plumbing modifications, no installation.
+              The user steps down: the cam converts foot pressure to shaft rotation, the spring
+              cushions the stroke, the bearing keeps everything spinning freely, and the rotating
+              blades shear hair cleanly at the drain opening. Lift your foot, and the spring resets
+              the whole mechanism in under a second. The complete cycle — step, cut, reset — happens
+              faster than the shower water reaches the drain.
             </p>
           </div>
         </div>
@@ -1295,9 +1247,7 @@
           <!-- TubStep -->
           <div class="competitor-card tubstep-card">
             <div class="comp-img">
-              <div class="img-placeholder" style="aspect-ratio:4/3;">
-                <p><em>TubStep™ photo<br>Replace: assets/comp-tubstep.jpg</em></p>
-              </div>
+              <img src="TubStep Product.png" alt="TubStep™" />
             </div>
             <div class="comp-body">
               <div class="comp-name">TubStep™</div>
@@ -1311,6 +1261,10 @@
       </div>
 
       <!-- Differentiators -->
+      <div class="reveal" style="margin-top:64px;margin-bottom:24px;">
+        <p class="section-eyebrow">Why TubStep™ Wins</p>
+        <h3 style="font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.6rem);color:var(--text-light);line-height:1.05;">The only active,<br>hands-free solution.</h3>
+      </div>
       <div class="pa-differentiators reveal">
         <div class="diff-item">
           <div class="diff-icon">[ 01 ]</div>
@@ -1347,54 +1301,57 @@
       <p class="section-eyebrow reveal">Exploded View</p>
       <h2 class="section-title reveal">Every part. Every purpose.</h2>
       <p class="section-intro reveal">
-        The TubStep™ assembly consists of five precision-machined stainless steel 316 components.
+        The TubStep™ assembly consists of ten precision-machined stainless steel 316 components.
         The exploded view below identifies each part and its role in the mechanism.
       </p>
 
       <div class="exploded-layout reveal">
         <div class="exploded-img">
-          <!--
-            REPLACE: Use SolidWorks Visualize exploded view export.
-            The image should show all five components separated along the assembly axis
-            with leader lines or numbers corresponding to the legend.
-          -->
-          <div class="img-placeholder" style="aspect-ratio:4/3;">
-            <p>SolidWorks Visualize exploded view — all five components labeled along assembly axis<br><em>Replace: assets/exploded-view.jpg</em></p>
-          </div>
+          <img src="Exploded view.png" alt="TubStep™ exploded view" />
         </div>
 
         <div class="component-legend">
           <p class="video-label" style="margin-bottom:20px;">[ Component Legend ]</p>
           <ol>
-            <li>
-              <div>
-                <div class="legend-name">Retaining Bolt</div>
-                <div class="legend-desc">Secures the assembly and sets the axial preload on the spring.</div>
-              </div>
+            <li class="legend-item">
+              <div class="legend-name">The Cap</div>
+              <div class="legend-desc">The floor-level stepping surface. The user places their foot on it directly, transmitting body weight downward through the mechanism toward the drain below.</div>
             </li>
-            <li>
-              <div>
-                <div class="legend-name">Keyed Shaft</div>
-                <div class="legend-desc">Central rotating member that transmits cam output to the blade assembly.</div>
-              </div>
+            <li class="legend-item">
+              <div class="legend-name">The Spring Shell</div>
+              <div class="legend-desc">Encases the return spring, protecting it from water, hair, and debris that could cause binding or corrosion. Ensures the spring operates within its designed travel range.</div>
             </li>
-            <li>
-              <div>
-                <div class="legend-name">Rotary Blade Assembly</div>
-                <div class="legend-desc">Overlapping blade geometry that shears hair in a scissor action when rotated.</div>
-              </div>
+            <li class="legend-item">
+              <div class="legend-name">The Spring</div>
+              <div class="legend-desc">A compression spring running through the center of the assembly. Stores energy on the downstroke and releases it to lift the cap back to its resting position after each step.</div>
             </li>
-            <li>
-              <div>
-                <div class="legend-name">Return Spring</div>
-                <div class="legend-desc">Compression spring that resets the mechanism after each foot press.</div>
-              </div>
+            <li class="legend-item">
+              <div class="legend-name">The Cam</div>
+              <div class="legend-desc">The heart of the motion-conversion system. Translates linear foot pressure into rotation at the central shaft, producing a full shearing stroke within the travel range of a typical foot press.</div>
             </li>
-            <li>
-              <div>
-                <div class="legend-name">Outer Bowl / Housing</div>
-                <div class="legend-desc">Structural housing that interfaces with the drain and channels water flow through the blade zone.</div>
-              </div>
+            <li class="legend-item">
+              <div class="legend-name">The Body</div>
+              <div class="legend-desc">The main structural housing. Contains and aligns all internal components, channels water through the blade region, and interfaces with the standard bathtub drain — no plumbing modification required.</div>
+            </li>
+            <li class="legend-item">
+              <div class="legend-name">The Force Transmitter</div>
+              <div class="legend-desc">The connector between the cam and the rotating blades. Takes the rotational output of the cam and delivers it directly to the blade assembly — the critical link that turns a foot press into a cutting stroke.</div>
+            </li>
+            <li class="legend-item">
+              <div class="legend-name">The Rotating Blades</div>
+              <div class="legend-desc">The blades that spin when the user steps down. Driven by the cam, they rotate against the fixed blades to create a scissor-shear action that severs hair cleanly at the drain opening.</div>
+            </li>
+            <li class="legend-item">
+              <div class="legend-name">The Fixed Blades</div>
+              <div class="legend-desc">Stationary shear surface seated inside the body. The scissor-style interface with the rotating blades ensures hair is severed cleanly — nothing passes through uncut.</div>
+            </li>
+            <li class="legend-item">
+              <div class="legend-name">The Water-Resistant Bearing</div>
+              <div class="legend-desc">Seated in the body near the blade assembly. Supports the rotating shaft and reduces friction under load. Sealed construction keeps it functional in the wet, hair-laden drain environment.</div>
+            </li>
+            <li class="legend-item">
+              <div class="legend-name">The Shaft Collar</div>
+              <div class="legend-desc">Located at the bottom of the assembly. Locks the cam axially, preventing it from sliding off the shaft during operation — the final retention point that keeps the drive train in alignment.</div>
             </li>
           </ol>
         </div>
@@ -1619,9 +1576,9 @@
           <div class="team-photo">
             <img src="sam.jpeg" alt="Photo of Sam" />
           </div>
-          <div class="team-name">Sam Thomason</div>
+          <div class="team-name">Samuel Thomason</div>
           <!-- REPLACE: Add short bio for Sam here -->
-          <p class="team-bio">Columbia Mechanical Engineering. Bio placeholder — two sentences describing Sam's role and background on the TubStep team.</p>
+          <p class="team-bio">From high-volume food service to high-precision aerospace manufacturing, I thrive in fast-paced environments where precision and safety are non-negotiable.</p>
         </div>
 
         <!-- Theo -->
@@ -1639,9 +1596,9 @@
           <div class="team-photo">
             <img src="zach.jpeg" alt="Photo of Zach" />
           </div>
-          <div class="team-name">Zach Silver</div>
+          <div class="team-name">Zachary Silver</div>
           <!-- REPLACE: Add short bio for Zach here -->
-          <p class="team-bio">Columbia Mechanical Engineering. Bio placeholder — two sentences describing Zach's role and background on the TubStep team.</p>
+          <p class="team-bio">A shower lover at heart, I was involved heavily with the research and ideation of this project. In my free time I enjoy brewing coffee and exploring nyc (who doesn't).</p>
         </div>
 
         <!-- Zoee -->
@@ -1712,6 +1669,7 @@
     document.querySelectorAll('#hero .reveal').forEach(el => {
       el.classList.add('visible');
     });
+
 
     // ─── Hero parallax ───
     const hero = document.getElementById('hero');

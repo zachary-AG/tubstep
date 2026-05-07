@@ -1042,16 +1042,6 @@
       </p>
 
       <!-- Demo video placeholder -->
-      <div class="proto-video-wrap reveal">
-        <p class="video-label">[ Full Demo Video ]</p>
-        <div class="video-placeholder">
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-            <circle cx="24" cy="24" r="23" stroke="#B0B8C1" stroke-width="1.5"/>
-            <path d="M19 16l14 8-14 8V16z" fill="#B0B8C1"/>
-          </svg>
-          <p>Full prototype demonstration video — replace this block with &lt;video&gt; or &lt;iframe&gt; embed</p>
-        </div>
-      </div>
 
       <!-- Four-subsystem narrative -->
       <div class="subsystem-grid">
@@ -1448,59 +1438,18 @@
               </div>
             </div>
             <div class="ac-img">
-              <div class="img-placeholder">
-                <p>FEA von Mises stress plot<br><em>Replace: assets/analysis-fea.jpg</em></p>
-              </div>
+              <img src="Analysis 2.png" alt="FEA von Mises stress plot" style="width:100%;height:100%;object-fit:contain;display:block;" />
             </div>
           </div>
         </div>
 
-        <!-- Study 3: Kinematics & Prototype Testing -->
-        <div class="analysis-card reveal reveal-delay-2">
-          <div class="analysis-card-header">
-            <span class="ac-label">[ STUDY 03 / KINEMATICS &amp; PROTOTYPE TESTING ]</span>
-            <span class="ac-title">Cam Mechanism and Cutting Performance</span>
-          </div>
-          <div class="analysis-card-body">
-            <div class="ac-text">
-              <div class="qmrd">
-                <div class="qmrd-item">
-                  <div class="qmrd-label">Question</div>
-                  <p>Does the cam geometry produce sufficient blade rotation per step, and does the physical prototype cut hair and drain water effectively?</p>
-                </div>
-                <div class="qmrd-item">
-                  <div class="qmrd-label">Method</div>
-                  <p>
-                    The cam-and-follower mechanism was analyzed kinematically to size the shaft diameter, cam profile angle, and stroke length required to fully traverse the cutting region of the grate in a single foot press. The shaft was sized to resist torsional shear under maximum cutting torque with a factor of safety of 2 against shear yield strength. An empirical test was then conducted on the assembled prototype, measuring water accumulation under real hair loading conditions and observing cutting performance directly.
-                  </p>
-                </div>
-                <div class="qmrd-item">
-                  <div class="qmrd-label">Result</div>
-                  <div class="result-highlight">Confirmed</div>
-                  <div class="result-sub">full blade sweep per actuation &nbsp;·&nbsp; prototype cuts hair and drains water under test conditions</div>
-                </div>
-                <div class="qmrd-item">
-                  <div class="qmrd-label">Design Decision</div>
-                  <p>
-                    The cam analysis confirmed that the selected geometry fully sweeps the cutting region within the travel range of a normal foot press, requiring no conscious effort from the user beyond stepping down. Empirical prototype testing validated the shearing mechanism against real hair under shower conditions.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="ac-img">
-              <div class="img-placeholder">
-                <p>Cam kinematic diagram or prototype test photo<br><em>Replace: assets/analysis-cam.jpg</em></p>
-              </div>
-            </div>
-          </div>
-        </div>
 
       </div><!-- /analysis-cards -->
 
       <!-- Standards Compliance Callout -->
       <div class="reveal" style="margin-top:64px;">
         <p class="section-eyebrow">Standards Compliance</p>
-        <h3 style="font-family:var(--font-display);font-size:clamp(1.6rem,2.5vw,2.2rem);color:var(--text-dark);margin-bottom:24px;line-height:1.05;">4 / 4 checks pass.</h3>
+        <h3 style="font-family:var(--font-display);font-size:clamp(1.6rem,2.5vw,2.2rem);color:var(--text-dark);margin-bottom:24px;line-height:1.05;">3 / 3 checks pass.</h3>
         <ul class="standards-list">
           <li>
             <span class="check">✓</span>
@@ -1516,13 +1465,7 @@
               Wall thickness 0.025"–0.134" for 1.5" OD steel — TubStep: <strong>0.095"</strong>
             </div>
           </li>
-          <li>
-            <span class="check">✓</span>
-            <div>
-              <span class="std-code">CFR 16 §1500.49</span><br>
-              Blade gaps must be &lt; 0.34" — TubStep: <strong>0.337"</strong>
-            </div>
-          </li>
+
           <li>
             <span class="check">✓</span>
             <div>

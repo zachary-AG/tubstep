@@ -648,7 +648,8 @@
       flex: 1;
     }
     @media (max-width: 768px) {
-      .exploded-layout { grid-template-columns: 1fr; gap: 40px; }
+      .exploded-layout { flex-direction: column; gap: 40px; }
+      .exploded-img img { max-height: 280px; width: auto; max-width: 100%; margin: 0 auto; display: block; }
     }
 
     .exploded-img .img-placeholder { aspect-ratio: 4/3; }
@@ -954,7 +955,7 @@
       <img id="hero-render" src="Render main.JPG" alt="TubStep™ device render" />
     </div>
 
-    <h1 class="hero-headline reveal reveal-delay-1">MAKE SHOWERING<br>EASIER.</h1>
+    <h1 class="hero-headline reveal reveal-delay-1">MAKE SHOWERING EASIER <br> WITH TUBSTEP<span>™</span></h1>
     <p class="hero-sub reveal reveal-delay-2">A hands-free, one-step hair clog prevention system for shower and bathtub drains.</p>
 
     <a href="#overview" class="hero-cta reveal reveal-delay-3">
@@ -989,11 +990,11 @@
             <h3>What It Is</h3>
             <p>
               TubStep™ is a drain insert that fits into any standard 1.5" bathtub drain.
-              When a user steps on the device, an internal rotary blade mechanism activates
-              and cuts hair into small pieces — no touching required.
+              When a user steps on the device, body weight powers an internal rotary blade
+              mechanism that cuts hair into small pieces — no touching required.
             </p>
             <p>
-              The device is made from ten stainless steel 316 parts, fully precision machined
+              The device is made from ten stainless steel 303 parts, fully precision machined
               and assembled by hand. Installation requires no tools: drop it in, and it's ready.
             </p>
           </div>
@@ -1001,13 +1002,14 @@
           <div class="two-col-text">
             <h3>Why We Made It</h3>
             <p>
-              Hair clogs are the #1 cause of residential drain blockages, affecting an estimated
-              40 million Americans. Existing solutions — like TubShroom and Press Drain — either
-              require users to handle accumulated hair, or fail to capture it at all.
+              Existing solutions — like TubShroom and Press Drain — either require users to
+              handle accumulated hair, or fail to capture it at all. They shift the problem.
+              They don't solve it.
             </p>
             <p>
-              TubStep doesn't collect hair. It shreds it. The pieces are small enough to flush
-              through the plumbing system without accumulating.
+              Hair clogs are the #1 cause of residential drain blockages, affecting an estimated
+              40 million Americans. TubStep doesn't collect hair. It shreds it — pieces small
+              enough to flush through the plumbing without accumulating.
             </p>
           </div>
           <div class="divider"></div>
@@ -1017,7 +1019,7 @@
               Foot pressure drives a cam mechanism that converts linear motion to shaft rotation.
               The rotating shaft drives overlapping blades in a scissor-shear action, cutting hair
               at the point of entry. When you lift your foot, a return spring resets the mechanism.
-              Water flushes the fragments down. The whole cycle takes under a second.
+              Water flushes the fragments down.
             </p>
           </div>
         </div>
@@ -1035,7 +1037,7 @@
       <h2 class="section-title reveal">Inside the mechanism.</h2>
       <p class="section-intro reveal">
         TubStep™ is built around four core mechanical systems. Each one was designed from first
-        principles to be reliable, safe, and manufacturable from stainless steel 316 — no electronics,
+        principles to be reliable and from stainless steel 303 — no electronics,
         no chemicals, no maintenance.
       </p>
 
@@ -1063,8 +1065,8 @@
             <div class="sub-label">[ 01 / CUTTING ]</div>
             <h3>Rotating Blades</h3>
             <p>
-              When the shaft turns, the rotating blade assembly sweeps through the drain opening,
-              severing any hair at the point of entry. The blades are machined with an overlapping
+              When the shaft turns, the rotating blade assembly sweeps through the bottom of the tubstep where hair collects,
+              severing it into small pieces. The blades are machined with an overlapping
               geometry that concentrates shear force at a precise contact line — ensuring a clean,
               reliable cut with every step, without pulling or tangling.
             </p>
@@ -1118,7 +1120,7 @@
             <div class="sub-label">[ 04 / ROTATION ]</div>
             <h3>Water-Resistant Bearing</h3>
             <p>
-              A sealed, water-resistant thrust bearing supports the rotating shaft under the
+              A water-resistant bearing supports the rotating shaft under the
               axial load of a foot press while allowing it to spin freely. Washers on either
               side distribute the load evenly and prevent metal-on-metal contact between
               rotating and stationary surfaces. Together, they ensure the blade assembly
@@ -1163,20 +1165,21 @@
       <!-- Intro stats + text -->
       <div class="prior-art-intro reveal">
         <div>
-          <div class="pa-stat-num">40M</div>
-          <div class="pa-stat-label">Americans with frequent drain clogs</div>
+          <div class="pa-stat-num">142M</div>
+          <div class="pa-stat-label">American households with a shower or bathtub</div>
           <div class="pa-stat-num" style="margin-top:32px;">#1</div>
-          <div class="pa-stat-label">Cause of residential drain blockages</div>
+          <div class="pa-stat-label">Cause of shower &amp; bathtub drain clogs</div>
         </div>
         <div class="pa-body">
           <p>
-            Hair accumulation in residential drains is the leading cause of blockages in bathtubs
-            and showers. Roughly 40 million Americans report dealing with frequent drain clogs,
-            creating a persistent maintenance burden and a substantial market for drain solutions.
+            Hair is the #1 cause of shower and bathtub drain clogs — and every one of America's
+            142 million households has a drain. Unlike grease or soap scum, hair doesn't dissolve
+            in water. It accumulates, tangles, and bonds with soap scum, forming blockages that no
+            passive drain cover prevents and no chemical reliably dissolves.
           </p>
           <p>
             The existing market is dominated by passive collection devices — products that trap hair
-            and require users to periodically remove and dispose of accumulated waste. These solutions
+            and require users to periodically remove and dispose of accumulated waste or by treatments - products that remove clogs only after they have formed. These solutions
             shift the problem rather than solving it, and nearly all require direct contact with
             wet, tangled hair.
           </p>
@@ -1200,7 +1203,7 @@
             <div class="comp-body">
               <div class="comp-name">Press Drain</div>
               <div class="comp-tag treatment">Treatment</div>
-              <p class="comp-desc">Simple one-step actuation but cosmetic only — doesn't capture or eliminate hair. Largely ineffective against clogging.</p>
+              <p class="comp-desc">Simple one-step actuation but was a kickstarter scam. Largely ineffective against clogging.</p>
               <div class="comp-verdict bad-verdict">✗ &nbsp;Not a real solution</div>
             </div>
           </div>
@@ -1226,7 +1229,7 @@
             <div class="comp-body">
               <div class="comp-name">Drain Snake</div>
               <div class="comp-tag treatment">Treatment</div>
-              <p class="comp-desc">A reactive tool used only after a clog has already formed. Requires direct, hands-on contact with accumulated hair and debris — widely considered one of the most unpleasant household maintenance tasks.</p>
+              <p class="comp-desc">A reactive tool used only after a clog has already formed. Direct contact with hair and debris — smell included.</p>
               <div class="comp-verdict bad-verdict">✗ &nbsp;Reactive treatment only — not a solution</div>
             </div>
           </div>
@@ -1262,8 +1265,8 @@
 
       <!-- Differentiators -->
       <div class="reveal" style="margin-top:64px;margin-bottom:24px;">
-        <p class="section-eyebrow">Why TubStep™ Wins</p>
-        <h3 style="font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.6rem);color:var(--text-light);line-height:1.05;">The only active,<br>hands-free solution.</h3>
+        <p class="section-eyebrow" style="color:#7aaa7a;">Why TubStep™ Wins</p>
+        <h3 style="font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.6rem);color:#7aaa7a;line-height:1.05;">The only active,<br>hands-free solution.</h3>
       </div>
       <div class="pa-differentiators reveal">
         <div class="diff-item">
@@ -1280,7 +1283,7 @@
         </div>
         <div class="diff-item">
           <div class="diff-icon">[ 04 ]</div>
-          <p><strong style="color:var(--text-light);">Minimal parts, easy installation.</strong> Five total components. Drops into any standard 1.5" drain. No tools, no modifications.</p>
+          <p><strong style="color:var(--text-light);">Minimal parts, easy installation.</strong> Ten total components. Drops into any standard 1.5" drain. No tools, no modifications.</p>
         </div>
       </div>
 
@@ -1301,7 +1304,7 @@
       <p class="section-eyebrow reveal">Exploded View</p>
       <h2 class="section-title reveal">Every part. Every purpose.</h2>
       <p class="section-intro reveal">
-        The TubStep™ assembly consists of ten precision-machined stainless steel 316 components.
+        The TubStep™ assembly consists of ten precision-machined stainless steel 303 components.
         The exploded view below identifies each part and its role in the mechanism.
       </p>
 
@@ -1319,7 +1322,7 @@
             </li>
             <li class="legend-item">
               <div class="legend-name">The Spring Shell</div>
-              <div class="legend-desc">Encases the return spring, protecting it from water, hair, and debris that could cause binding or corrosion. Ensures the spring operates within its designed travel range.</div>
+              <div class="legend-desc">Encases the return spring, protecting it from water, hair, and debris that could cause binding or corrosion.</div>
             </li>
             <li class="legend-item">
               <div class="legend-name">The Spring</div>
@@ -1335,7 +1338,7 @@
             </li>
             <li class="legend-item">
               <div class="legend-name">The Force Transmitter</div>
-              <div class="legend-desc">The connector between the cam and the rotating blades. Takes the rotational output of the cam and delivers it directly to the blade assembly — the critical link that turns a foot press into a cutting stroke.</div>
+              <div class="legend-desc">The connector between the cam and the rotating blades. Takes the rotational output of the cam and delivers it directly to the blade assembly.</div>
             </li>
             <li class="legend-item">
               <div class="legend-name">The Rotating Blades</div>
@@ -1347,11 +1350,11 @@
             </li>
             <li class="legend-item">
               <div class="legend-name">The Water-Resistant Bearing</div>
-              <div class="legend-desc">Seated in the body near the blade assembly. Supports the rotating shaft and reduces friction under load. Sealed construction keeps it functional in the wet, hair-laden drain environment.</div>
+              <div class="legend-desc">Seated in the body near the blade assembly. Supports the rotating shaft and reduces friction under load. Water resistant materials keep it functional in the wet, hair-laden drain environment.</div>
             </li>
             <li class="legend-item">
               <div class="legend-name">The Shaft Collar</div>
-              <div class="legend-desc">Located at the bottom of the assembly. Locks the cam axially, preventing it from sliding off the shaft during operation — the final retention point that keeps the drive train in alignment.</div>
+              <div class="legend-desc">Located at the bottom of the assembly and is the final retention point that keeps the shaft in vertical alignment.</div>
             </li>
           </ol>
         </div>
@@ -1378,173 +1381,157 @@
         <div class="analysis-card reveal">
           <div class="analysis-card-header">
             <span class="ac-label">[ STUDY 01 / FLUID MECHANICS ]</span>
-            <span class="ac-title">Minimum Drain Area for Water Flow</span>
+            <span class="ac-title">Water Flow Through the Drain Grate</span>
           </div>
           <div class="analysis-card-body">
             <div class="ac-text">
               <div class="qmrd">
                 <div class="qmrd-item">
                   <div class="qmrd-label">Question</div>
-                  <p>How much open drain area is required to prevent water backup during normal shower use?</p>
+                  <p>Does the TubStep™ grate geometry pass a standard showerhead's flow rate without objectionable pooling?</p>
                 </div>
                 <div class="qmrd-item">
                   <div class="qmrd-label">Method</div>
                   <p>
-                    Shower flow capped at 0.158 kg/s per code. Assumed 1 inch of hydrostatic head pressure.
-                    Applied pressure-driven flow equations to calculate minimum open area through the drain
-                    geometry with a factor of safety of 1.5.
+                    The grate was modeled as a thin-plate orifice discharging to atmosphere. Design flow rate was set at 9.5 L/min (2.5 GPM), per the U.S. Department of Energy's federal showerhead cap under 10 CFR 430.32(p). A discharge coefficient of C<sub>d</sub> = 0.61 was used, consistent with sharp-edged orifices at high Reynolds number. Open grate area: A = 0.8691 in². Pooling-depth constraint: h ≤ 1 inch. A progressive-blockage extension modeled hair accumulation as linear area reduction, with each hair approximated as an 80 µm diameter fiber of 150 mm effective length laid flat across the grate — a deliberately conservative assumption.
                   </p>
                 </div>
                 <div class="qmrd-item">
                   <div class="qmrd-label">Result</div>
-                  <div class="result-highlight">0.869 in²</div>
-                  <div class="result-sub">minimum open area &nbsp;·&nbsp; equivalent diameter: 1.052"</div>
+                  <div class="result-highlight">22 hairs</div>
+                  <div class="result-sub">conservative upper bound before the 1-inch pooling threshold is exceeded &nbsp;·&nbsp; clean drain pools to only 0.44 in at design flow, providing 50% margin</div>
                 </div>
                 <div class="qmrd-item">
                   <div class="qmrd-label">Design Decision</div>
                   <p>
-                    TubStep™ blade geometry was designed to maintain more than 0.869 in² of open area
-                    in every possible blade position — including worst-case rotation angles.
+                    The true clog tolerance is likely meaningfully better than 22 hairs — the model assumes each hair lies flat across open area, when in practice hair drapes around the grate struts and hangs into the drain, occluding far less area per strand. The 22-hair figure is a conservative upper bound, not a typical operating limit.
                   </p>
                 </div>
               </div>
             </div>
             <div class="ac-img">
-              <!--
-                Diagram or screenshot from the water flow analysis showing the pressure-driven flow
-                calculation, drain geometry cross-section, and annotated minimum open area result.
-              -->
-              <div class="img-placeholder">
-                <p>Water flow analysis diagram — annotated drain geometry and open area calculation<br><em>Replace: assets/analysis-flow.jpg</em></p>
-              </div>
+              <img src="fluid dynamics.png" alt="Water flow analysis diagram" style="width:100%;height:100%;object-fit:contain;display:block;" />
             </div>
           </div>
         </div>
 
-        <!-- Study 2: Blade Shear -->
+        <!-- Study 2: FEA -->
         <div class="analysis-card reveal reveal-delay-1">
           <div class="analysis-card-header">
-            <span class="ac-label">[ STUDY 02 / MECHANICS OF MATERIALS ]</span>
-            <span class="ac-title">Blade Shear Force &amp; Scissor Mechanics</span>
+            <span class="ac-label">[ STUDY 02 / STRUCTURAL ANALYSIS ]</span>
+            <span class="ac-title">FEA of the Base Under Stepping Load</span>
           </div>
           <div class="analysis-card-body">
             <div class="ac-text">
               <div class="qmrd">
                 <div class="qmrd-item">
                   <div class="qmrd-label">Question</div>
-                  <p>What blade geometry produces effective and reliable hair shearing under realistic foot-pressure loads?</p>
+                  <p>Does the TubStep™ base withstand worst-case user stepping loads with adequate factor of safety?</p>
                 </div>
                 <div class="qmrd-item">
                   <div class="qmrd-label">Method</div>
                   <p>
-                    Blade interaction modeled as scissor-style shearing — shear force concentrated at the
-                    contact line between overlapping blades. A razor blade proof-of-concept prototype was
-                    built and tested to validate the cutting force and geometry before final parts were machined.
+                    A conservative design load was defined using the 95th-percentile U.S. male body mass of 110–120 kg, scaled to 140 kg to capture the upper tail of the population, then multiplied by a dynamic amplification factor of 1.5 for stepping impact — yielding a design load of 2050 N. Load was applied through the central shaft interface; the outer rim was constrained vertically to simulate contact with a rigid bathtub floor. FEA evaluated von Mises stress and displacement, with a target factor of safety of 2–3.
                   </p>
                 </div>
                 <div class="qmrd-item">
                   <div class="qmrd-label">Result</div>
-                  <div class="result-highlight">Rotary V2</div>
-                  <div class="result-sub">design confirmed — clean shear at blade overlap under foot-load</div>
+                  <div class="result-highlight">155.8 MPa</div>
+                  <div class="result-sub">peak von Mises stress &nbsp;·&nbsp; located at strut-to-hub fillets &nbsp;·&nbsp; rim and outer wall remain well below peak</div>
                 </div>
                 <div class="qmrd-item">
                   <div class="qmrd-label">Design Decision</div>
                   <p>
-                    The rotary V2 overlapping-blade design was selected over a linear reciprocating blade
-                    approach. The rotary method produces a more consistent shear contact line and requires
-                    lower peak force to initiate cutting.
+                    Stress concentration occurred at the strut-to-hub fillets, consistent with classical results for radially loaded thin-walled cylindrical structures with internal cross-bracing. This finding directly informed the final fillet radius selection. The rigid-floor assumption is conservative — real installations include local compliance from grout and sealant, which would reduce peak fillet stress.
                   </p>
                 </div>
               </div>
             </div>
             <div class="ac-img">
-              <!--
-                Diagram or photograph from the blade shear study, showing either the razor blade
-                proof-of-concept, the scissor mechanics diagram, or the blade overlap geometry
-                with annotated shear contact line.
-              -->
               <div class="img-placeholder">
-                <p>Blade shear study — scissor mechanics diagram or razor blade proof-of-concept photo<br><em>Replace: assets/analysis-blades.jpg</em></p>
+                <p>FEA von Mises stress plot<br><em>Replace: assets/analysis-fea.jpg</em></p>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Study 3: Standards -->
+        <!-- Study 3: Kinematics & Prototype Testing -->
         <div class="analysis-card reveal reveal-delay-2">
           <div class="analysis-card-header">
-            <span class="ac-label">[ STUDY 03 / STANDARDS COMPLIANCE ]</span>
-            <span class="ac-title">Safety &amp; Dimensional Standards</span>
+            <span class="ac-label">[ STUDY 03 / KINEMATICS &amp; PROTOTYPE TESTING ]</span>
+            <span class="ac-title">Cam Mechanism and Cutting Performance</span>
           </div>
           <div class="analysis-card-body">
             <div class="ac-text">
               <div class="qmrd">
                 <div class="qmrd-item">
                   <div class="qmrd-label">Question</div>
-                  <p>Does TubStep™ meet applicable federal, ASME, and ASTM standards for dimensional and safety compliance?</p>
+                  <p>Does the cam geometry produce sufficient blade rotation per step, and does the physical prototype cut hair and drain water effectively?</p>
                 </div>
                 <div class="qmrd-item">
                   <div class="qmrd-label">Method</div>
-                  <p>Checked TubStep™ dimensions against four applicable standards:</p>
-                  <ul class="standards-list">
-                    <li>
-                      <span class="check">✓</span>
-                      <div>
-                        <span class="std-code">ASME A112.18.2 §4.6.1.2</span><br>
-                        Min. 1.5" nominal OD for bathtub drains — TubStep: <strong>1.5"</strong>
-                      </div>
-                    </li>
-                    <li>
-                      <span class="check">✓</span>
-                      <div>
-                        <span class="std-code">ASTM A554-21 Table 2</span><br>
-                        Wall thickness 0.025"–0.134" for 1.5" OD steel — TubStep: <strong>0.095"</strong>
-                      </div>
-                    </li>
-                    <li>
-                      <span class="check">✓</span>
-                      <div>
-                        <span class="std-code">CFR 16 §1500.49</span><br>
-                        Blade gaps must be &lt; 0.34" — TubStep: <strong>0.337"</strong>
-                      </div>
-                    </li>
-                    <li>
-                      <span class="check">✓</span>
-                      <div>
-                        <span class="std-code">ASTM F409-22</span><br>
-                        Material &amp; wall thickness for tubular plumbing components — <strong>Pass</strong>
-                      </div>
-                    </li>
-                  </ul>
+                  <p>
+                    The cam-and-follower mechanism was analyzed kinematically to size the shaft diameter, cam profile angle, and stroke length required to fully traverse the cutting region of the grate in a single foot press. The shaft was sized to resist torsional shear under maximum cutting torque with a factor of safety of 2 against shear yield strength. An empirical test was then conducted on the assembled prototype, measuring water accumulation under real hair loading conditions and observing cutting performance directly.
+                  </p>
                 </div>
                 <div class="qmrd-item">
                   <div class="qmrd-label">Result</div>
-                  <div class="result-highlight">4 / 4</div>
-                  <div class="result-sub">all standards checks pass &nbsp;·&nbsp; blade gaps ≤ 0.337"</div>
+                  <div class="result-highlight">Confirmed</div>
+                  <div class="result-sub">full blade sweep per actuation &nbsp;·&nbsp; prototype cuts hair and drains water under test conditions</div>
                 </div>
                 <div class="qmrd-item">
                   <div class="qmrd-label">Design Decision</div>
                   <p>
-                    Razor blades were eliminated from the final design in favor of the machined rotary
-                    mechanism, which naturally constrains all blade-access gaps to ≤ 0.337" — meeting
-                    the CPSC safety rule with 0.003" margin.
+                    The cam analysis confirmed that the selected geometry fully sweeps the cutting region within the travel range of a normal foot press, requiring no conscious effort from the user beyond stepping down. Empirical prototype testing validated the shearing mechanism against real hair under shower conditions.
                   </p>
                 </div>
               </div>
             </div>
             <div class="ac-img">
-              <!--
-                Table, diagram, or annotated screenshot summarizing the four standards checks,
-                with TubStep dimensions compared against each standard's requirement.
-              -->
               <div class="img-placeholder">
-                <p>Standards compliance summary — annotated dimensional comparison table<br><em>Replace: assets/analysis-standards.jpg</em></p>
+                <p>Cam kinematic diagram or prototype test photo<br><em>Replace: assets/analysis-cam.jpg</em></p>
               </div>
             </div>
           </div>
         </div>
 
       </div><!-- /analysis-cards -->
+
+      <!-- Standards Compliance Callout -->
+      <div class="reveal" style="margin-top:64px;">
+        <p class="section-eyebrow">Standards Compliance</p>
+        <h3 style="font-family:var(--font-display);font-size:clamp(1.6rem,2.5vw,2.2rem);color:var(--text-dark);margin-bottom:24px;line-height:1.05;">4 / 4 checks pass.</h3>
+        <ul class="standards-list">
+          <li>
+            <span class="check">✓</span>
+            <div>
+              <span class="std-code">ASME A112.18.2 §4.6.1.2</span><br>
+              Min. 1.5" nominal OD for bathtub drains — TubStep: <strong>1.5"</strong>
+            </div>
+          </li>
+          <li>
+            <span class="check">✓</span>
+            <div>
+              <span class="std-code">ASTM A554-21 Table 2</span><br>
+              Wall thickness 0.025"–0.134" for 1.5" OD steel — TubStep: <strong>0.095"</strong>
+            </div>
+          </li>
+          <li>
+            <span class="check">✓</span>
+            <div>
+              <span class="std-code">CFR 16 §1500.49</span><br>
+              Blade gaps must be &lt; 0.34" — TubStep: <strong>0.337"</strong>
+            </div>
+          </li>
+          <li>
+            <span class="check">✓</span>
+            <div>
+              <span class="std-code">ASTM F409-22</span><br>
+              Material &amp; wall thickness for tubular plumbing components — <strong>Pass</strong>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -1598,7 +1585,7 @@
           </div>
           <div class="team-name">Zachary Silver</div>
           <!-- REPLACE: Add short bio for Zach here -->
-          <p class="team-bio">A shower lover at heart, I was involved heavily with the research and ideation of this project. In my free time I enjoy brewing coffee and exploring nyc (who doesn't).</p>
+          <p class="team-bio">A shower lover at heart, I was involved heavily with the research and ideation of this project. In my free time I enjoy buying coffee, grinding coffee, brewing coffee and drinking it.</p>
         </div>
 
         <!-- Zoee -->

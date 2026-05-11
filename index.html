@@ -1041,7 +1041,18 @@
         no chemicals, no maintenance.
       </p>
 
-      <!-- Demo video placeholder -->
+      <!-- Demo video -->
+      <div class="proto-video-wrap reveal">
+        <p class="video-label">[ Prototype Demo ]</p>
+        <iframe
+          src="https://www.youtube.com/embed/4w32C--kFhM"
+          title="TubStep prototype demo"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          style="width:100%;aspect-ratio:16/9;border-radius:4px;display:block;">
+        </iframe>
+      </div>
 
       <!-- Four-subsystem narrative -->
       <div class="subsystem-grid">
@@ -1383,18 +1394,18 @@
                 <div class="qmrd-item">
                   <div class="qmrd-label">Method</div>
                   <p>
-                    The grate was modeled as a thin-plate orifice discharging to atmosphere. Design flow rate was set at 9.5 L/min (2.5 GPM), per the U.S. Department of Energy's federal showerhead cap under 10 CFR 430.32(p). A discharge coefficient of C<sub>d</sub> = 0.61 was used, consistent with sharp-edged orifices at high Reynolds number. Open grate area: A = 0.8691 in². Pooling-depth constraint: h ≤ 1 inch. A progressive-blockage extension modeled hair accumulation as linear area reduction, with each hair approximated as an 80 µm diameter fiber of 150 mm effective length laid flat across the grate — a deliberately conservative assumption.
+                    The grate was modeled as a thin-plate orifice discharging to atmosphere. Design flow rate was set at 9.5 L/min (2.5 GPM), per the U.S. Department of Energy's federal showerhead cap under 10 CFR 430.32(p). A discharge coefficient of C<sub>d</sub> = 0.61 was used, consistent with sharp-edged orifices at high Reynolds number. Open grate area: A = 0.8691 in², distributed across four equal quadrant openings around a central hub. Pooling-depth constraint: h ≤ 1 inch. A progressive-blockage extension modeled hair accumulation as a linear reduction in effective open area, with each hair approximated as an 80 µm diameter fiber of 150 mm effective length laid flat across the grate — a deliberately conservative assumption.
                   </p>
                 </div>
                 <div class="qmrd-item">
                   <div class="qmrd-label">Result</div>
                   <div class="result-highlight">22 hairs</div>
-                  <div class="result-sub">conservative upper bound before the 1-inch pooling threshold is exceeded &nbsp;·&nbsp; clean drain pools to only 0.44 in at design flow, providing 50% margin</div>
+                  <div class="result-sub">conservative upper bound on accumulation before the 1-inch pooling threshold is exceeded &nbsp;·&nbsp; clean drain pools to only 0.43 in at design flow, providing 50% margin</div>
                 </div>
                 <div class="qmrd-item">
                   <div class="qmrd-label">Design Decision</div>
                   <p>
-                    The true clog tolerance is likely meaningfully better than 22 hairs — the model assumes each hair lies flat across open area, when in practice hair drapes around the grate struts and hangs into the drain, occluding far less area per strand. The 22-hair figure is a conservative upper bound, not a typical operating limit.
+                    The true clog tolerance is likely meaningfully better than 22 hairs. The model assumes each hair lies flat across open area, when in practice hair drapes around the grate struts and hangs into the drain, occluding far less area per strand — perhaps by a factor of 2–5. The 22-hair figure is a conservative upper bound, not a typical operating limit.
                   </p>
                 </div>
               </div>
@@ -1405,7 +1416,7 @@
           </div>
         </div>
 
-        <!-- Study 2: FEA -->
+        <!-- Study 2: FEA Base -->
         <div class="analysis-card reveal reveal-delay-1">
           <div class="analysis-card-header">
             <span class="ac-label">[ STUDY 02 / STRUCTURAL ANALYSIS ]</span>
@@ -1421,24 +1432,62 @@
                 <div class="qmrd-item">
                   <div class="qmrd-label">Method</div>
                   <p>
-                    A conservative design load was defined using the 95th-percentile U.S. male body mass of 110–120 kg, scaled to 140 kg to capture the upper tail of the population, then multiplied by a dynamic amplification factor of 1.5 for stepping impact — yielding a design load of 2050 N. Load was applied through the central shaft interface; the outer rim was constrained vertically to simulate contact with a rigid bathtub floor. FEA evaluated von Mises stress and displacement, with a target factor of safety of 2–3.
+                    A conservative design load was defined using the 95th-percentile U.S. male body mass of 110–120 kg, scaled to 140 kg to capture the upper tail of the population, yielding a static design load of 1,373 N. Load was applied through the central shaft interface; the outer rim was constrained vertically to simulate rigid bathtub floor contact. The base was modeled as SS303 stainless steel (σ<sub>y</sub> = 207 MPa). The mesh used parabolic 10-node tetrahedral elements with curve-following enabled at strut-to-hub fillets. An h-refinement convergence study was performed to confirm that the reported peak stress was a genuine geometric concentration rather than a mesh-induced singularity.
                   </p>
                 </div>
                 <div class="qmrd-item">
                   <div class="qmrd-label">Result</div>
-                  <div class="result-highlight">155.8 MPa</div>
-                  <div class="result-sub">peak von Mises stress &nbsp;·&nbsp; located at strut-to-hub fillets &nbsp;·&nbsp; rim and outer wall remain well below peak</div>
+                  <div class="result-highlight">FOS 2.2</div>
+                  <div class="result-sub">minimum factor of safety against yield, exceeding the target of 2.0 &nbsp;·&nbsp; peak von Mises stress of 93.5 MPa concentrated at strut-to-hub fillets &nbsp;·&nbsp; mesh convergence confirmed at 2.86% change between final refinement steps</div>
                 </div>
                 <div class="qmrd-item">
                   <div class="qmrd-label">Design Decision</div>
                   <p>
-                    Stress concentration occurred at the strut-to-hub fillets, consistent with classical results for radially loaded thin-walled cylindrical structures with internal cross-bracing. This finding directly informed the final fillet radius selection. The rigid-floor assumption is conservative — real installations include local compliance from grout and sealant, which would reduce peak fillet stress.
+                    The rigid-floor boundary condition is conservative — real installations include local compliance from grout and sealant that would redistribute load and reduce peak fillet stress. The mesh convergence study confirmed the 93.5 MPa peak is a real geometric stress concentration, not a numerical artifact, making the 2.2 FOS a trustworthy design margin.
                   </p>
                 </div>
               </div>
             </div>
             <div class="ac-img">
               <img src="Analysis 2.png" alt="FEA von Mises stress plot" style="width:100%;height:100%;object-fit:contain;display:block;" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Study 3: FEA Rotary Blade -->
+        <div class="analysis-card reveal reveal-delay-2">
+          <div class="analysis-card-header">
+            <span class="ac-label">[ STUDY 03 / STRUCTURAL ANALYSIS ]</span>
+            <span class="ac-title">FEA of the Rotary Blade</span>
+          </div>
+          <div class="analysis-card-body">
+            <div class="ac-text">
+              <div class="qmrd">
+                <div class="qmrd-item">
+                  <div class="qmrd-label">Question</div>
+                  <p>Does the rotary blade's pre-bow geometry survive each cutting stroke elastically, preserving the scissor contact force required for hair shearing?</p>
+                </div>
+                <div class="qmrd-item">
+                  <div class="qmrd-label">Method</div>
+                  <p>
+                    The rotary blade incorporates a slight inward pre-bow — analogous to scissor blade bowing — that maintains distributed contact force against the fixed-blade cross geometry. The analysis evaluated whether this pre-bow is preserved under the worst-case condition: full flattening of the blade from its as-manufactured bent configuration. The pre-bow was applied in SOLIDWORKS using the Flex feature with a bend angle of θ = 10° and bend radius R = 2.15 in, producing a tip-to-flat offset (sagitta) of δ = 0.033 in. A prescribed displacement of 0.03 in was applied at the blade tip edges with the hub face fully fixed. Blade material: AISI 321 Annealed Stainless Steel (E = 193 GPa, σ<sub>y</sub> = 234 MPa). An h-refinement convergence study over four mesh levels confirmed numerical stability.
+                  </p>
+                </div>
+                <div class="qmrd-item">
+                  <div class="qmrd-label">Result</div>
+                  <div class="result-highlight">Elastic recovery confirmed</div>
+                  <div class="result-sub">blade body and mid-span regions remain well within yield under full flattening &nbsp;·&nbsp; peak stress localized at blade roots, identifying the root fillet as the candidate site for fatigue initiation under repeated use</div>
+                </div>
+                <div class="qmrd-item">
+                  <div class="qmrd-label">Design Decision</div>
+                  <p>
+                    The 10° pre-bow geometry is preserved after each actuation stroke, validating that the scissor contact force is maintained under repeated use. The blade-root stress concentration directly informed the decision to include a fillet radius at the blade-to-hub transition. The reported tip-edge peak of 1.324 GPa is a boundary condition singularity artifact and is not used in any factor-of-safety calculation.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="ac-img">
+              <img src="Analysis 3.png" alt="FEA rotary blade stress plot" style="width:100%;height:100%;object-fit:contain;display:block;" />
             </div>
           </div>
         </div>
@@ -1498,7 +1547,7 @@
           </div>
           <div class="team-name">Joe Maeda</div>
           <!-- REPLACE: Add short bio for Joe here -->
-          <p class="team-bio">Columbia Mechanical Engineering. Bio placeholder — two sentences describing Joe's role and background on the TubStep team.</p>
+          <p class="team-bio">Over 23+ years experience in showering. Offered my foot for testing and user experience design.</p>
         </div>
 
         <!-- Sam -->
@@ -1538,7 +1587,7 @@
           </div>
           <div class="team-name">Zoee Nocom</div>
           <!-- REPLACE: Add short bio for Zoee here -->
-          <p class="team-bio">Columbia Mechanical Engineering. Bio placeholder — two sentences describing Zoee's role and background on the TubStep team.</p>
+          <p class="team-bio">Amateur Crocheter, Matcha Lover and Hair Donater.</p>
         </div>
 
       </div><!-- /team-grid -->
